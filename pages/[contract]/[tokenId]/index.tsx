@@ -399,6 +399,23 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
           <div className="grid grid-cols-2 gap-8">
             <Price
               title="List Price"
+              source={
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={sourceRedirect}
+                  className="reservoir-body flex items-center gap-2"
+                >
+                  on {token?.market?.floorAsk?.source?.name}
+                  {
+                    <img
+                      className="h-6 w-6"
+                      src={sourceLogo}
+                      alt="Source Logo"
+                    />
+                  }
+                </a>
+              }
               price={
                 <FormatEth
                   amount={token?.market?.floorAsk?.price}
