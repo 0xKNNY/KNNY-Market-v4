@@ -227,14 +227,14 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
         {title}
         {description}
         {image}
-        {/* <script
+         <script
           type="module"
           src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
         ></script>
         <script
           noModule
           src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"
-        ></script> */}
+        ></script> 
       </Head>
       {/* TOKEN IMAGE */}
       <article className="col-span-full grid content-start gap-4 md:col-span-4 lg:col-span-5 lg:col-start-2">
@@ -620,23 +620,23 @@ const Media: FC<{
   }
 
   // 3D
-  // if (extension === 'gltf' || extension === 'glb') {
-  //   return (
-  //     <div>
-  //       <model-viewer
-  //         src={animation_url}
-  //         ar
-  //         ar-modes="webxr scene-viewer quick-look"
-  //         environment-image="https://modelviewer.dev/shared-assets/environments/moon_1k.hdr"
-  //         poster="/NeilArmstrong.webp"
-  //         seamless-poster
-  //         shadow-intensity="1"
-  //         camera-controls
-  //         enable-pan
-  //       ></model-viewer>
-  //     </div>
-  //   )
-  // }
+   if (extension === 'gltf' || extension === 'glb') {
+     return (
+       <div>
+         <model-viewer
+           src={animation_url}
+           ar
+           ar-modes="webxr scene-viewer quick-look"
+           environment-image="https://modelviewer.dev/shared-assets/environments/moon_1k.hdr"
+           poster="/NeilArmstrong.webp"
+           seamless-poster
+           shadow-intensity="1"
+           camera-controls
+           enable-pan
+         ></model-viewer>
+       </div>
+     )
+   }
 
   // HTML
   if (extension === 'html' || extension === undefined) {
