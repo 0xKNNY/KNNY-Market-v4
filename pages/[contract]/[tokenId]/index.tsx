@@ -227,25 +227,14 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
       <Head>
         {title}
         {description}
-        {image}
-            
-        <div className="container">
-        <Script
-          type="module"
-          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
-        ></Script>
-          <div>Home Page</div>
-        </div>
-
-        <div className="container">
-        <Script
-          type="module"
-          src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"
-        ></Script>
-          <div>Home Page</div>
-        </div>
-          
+        {image}  
       </Head>
+      <Script type='module'
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"/>
+
+        <Script type='module'
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"/>
+
       {/* TOKEN IMAGE */}
       <article className="col-span-full grid content-start gap-4 md:col-span-4 lg:col-span-5 lg:col-start-2">
         {/* TEST MODEL-VIEWER WITH LOCAL FILES */}
