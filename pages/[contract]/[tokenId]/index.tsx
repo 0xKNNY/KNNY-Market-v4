@@ -31,6 +31,7 @@ import {
 } from 'react-icons/fi'
 import useAsks from 'hooks/useAsks'
 import Listings from 'components/token/Listings'
+import Script from 'next/script'
 
 // Environment variables
 // For more information about these variables
@@ -227,14 +228,23 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
         {title}
         {description}
         {image}
-         <script
+            
+        <div className="container">
+        <Script
           type="module"
           src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"
-        ></script>
-        <script
-          noModule
+        ></Script>
+          <div>Home Page</div>
+        </div>
+
+        <div className="container">
+        <Script
+          type="module"
           src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"
-        ></script> 
+        ></Script>
+          <div>Home Page</div>
+        </div>
+          
       </Head>
       {/* TOKEN IMAGE */}
       <article className="col-span-full grid content-start gap-4 md:col-span-4 lg:col-span-5 lg:col-start-2">
