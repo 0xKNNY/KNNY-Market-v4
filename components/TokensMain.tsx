@@ -322,8 +322,7 @@ const TokensMain: FC<Props> = ({
         {image}
       </Head>
       
-      <div className="col-span-full grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12">
-        <hr className="col-span-full border-gray-300" />
+      <div className="col-span-full  grid-cols-4 md:grid-cols-8 lg:grid-cols-12">
         <Sidebar attributes={attributes} setTokensSize={tokens.setSize} />
         <div className="col-span-full mt-4 ml-6 md:col-start-4 md:col-end-[-1] lg:col-start-5 lg:col-end-[-1] xl:col-start-4 xl:col-end-[-1]">
           <div className="mb-10 hidden items-center justify-between md:flex">
