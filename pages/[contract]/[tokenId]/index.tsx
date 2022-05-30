@@ -532,7 +532,7 @@ const Price: FC<{ title: string; price: ReactNode; source?: ReactNode }> = ({
   children,
 }) => (
   <div className="flex flex-col space-y-5">
-    <div className="flex-grow">
+    <div className="flex-grow text-white">
       <div className="reservoir-h5">{title}</div>
       <div>{source}</div>
     </div>
@@ -597,7 +597,7 @@ const Media: FC<{
   // VIDEO
   if (extension === 'mp4') {
     return (
-      <video className="mb-4 w-[533px]" controls>
+      <video className="mb-4 w-full" controls>
         <source src={animation_url} type="video/mp4" />
         Your browser does not support the
         <code>video</code> element.
@@ -609,7 +609,7 @@ const Media: FC<{
   if (extension === 'wav' || extension === 'mp3') {
     return (
       <div>
-        <img className="mb-4 w-[533px] rounded-2xl" src={tokenImage} />
+        <img className="mb-4 w-full" src={tokenImage} />
         <audio className="mb-4 w-full" controls src={animation_url}>
           Your browser does not support the
           <code>audio</code> element.
@@ -623,13 +623,14 @@ const Media: FC<{
      return (
        <div>
          <model-viewer
+         className="w-full"
            src={animation_url}
            ar
            ar-modes="webxr scene-viewer quick-look"
-           environment-image="https://modelviewer.dev/shared-assets/environments/moon_1k.hdr"
+           environment-image="#000000"
            poster="/NeilArmstrong.webp"
            seamless-poster
-           shadow-intensity="1"
+           shadow-intensity="0"
            camera-controls
            enable-pan
          ></model-viewer>

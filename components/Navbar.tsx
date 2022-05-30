@@ -42,7 +42,7 @@ const Navbar: FC<Props> = ({ communityId, mode }) => {
   const displaySearch = rule1 || rule2
 
   return (
-    <nav className="col-span-full flex gap-2 py-3 sm:py-4">
+    <nav className="col-span-full flex gap-2 py-3 sm:py-4 text-black">
       <Link href="/">
         <a className="mr-4 inline-flex items-center gap-3">
           <img src={logo} alt={logoAlt} className="w-6 sm:block" />
