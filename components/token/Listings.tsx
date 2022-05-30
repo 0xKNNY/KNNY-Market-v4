@@ -19,7 +19,7 @@ const Listings: FC<Props> = ({ asks }) => {
   return (
     <Card>
       <div className="reservoir-h5 mb-4">Listings</div>
-      <div className="max-h-96 overflow-hidden overflow-y-auto rounded-2xl">
+      <div className="max-h-96 overflow-hidden overflow-y-auto rounded-md">
         <table className="min-w-full table-auto overflow-y-auto">
           <thead>
             <tr>

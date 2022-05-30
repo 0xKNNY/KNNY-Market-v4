@@ -252,7 +252,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
         ></model-viewer> */}
         {tokenOpenSea?.extension === null ? (
           <img
-            className="w-full rounded-2xl"
+            className="w-full rounded-md"
             src={optimizeImage(token?.token?.image, 533)}
           />
         ) : (
@@ -261,7 +261,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
             tokenImage={optimizeImage(token?.token?.image, 533)}
           />
         )}
-        <article className="col-span-full rounded-2xl border border-gray-300 bg-white p-6">
+        <article className="col-span-full rounded-md border border-[2px] border-neutral-200 bg-white p-6">
           <div className="reservoir-h5 mb-4">Collection Info</div>
           <Link
             href={
@@ -290,7 +290,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
             </div>
           )}
         </article>
-        <article className="col-span-full rounded-2xl border border-gray-300 bg-white p-6">
+        <article className="col-span-full rounded-md border border-[2px] border-neutral-200 bg-white p-6">
           <div className="mb-4 flex items-center justify-between">
             <div className="reservoir-h5">Token Info</div>
             <div className="flex items-center gap-2">
@@ -367,7 +367,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
         </article>
       </article>
       <div className="col-span-full grid content-start gap-4 md:col-span-4 lg:col-span-5">
-        <article className="col-span-full rounded-2xl border border-gray-300 bg-white p-6">
+        <article className="col-span-full rounded-md border border-[2px] border-neutral-200 bg-white p-6">
           <div className="reservoir-h3 mb-6 overflow-hidden">
             {token?.token?.name || `#${token?.token?.tokenId}`}
           </div>
@@ -394,10 +394,10 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
             </Link>
           )}
         </article>
-        <article className="col-span-full rounded-2xl border border-gray-300 bg-white p-6">
+        <article className="col-span-full rounded-md border border-[2px] border-neutral-200 bg-white p-6">
           <div className="grid grid-cols-2 gap-8">
             <Price
-              title="List Price"
+              title="Current Price"
               source={
                 <a
                   target="_blank"
@@ -532,7 +532,7 @@ const Price: FC<{ title: string; price: ReactNode; source?: ReactNode }> = ({
   children,
 }) => (
   <div className="flex flex-col space-y-5">
-    <div className="flex-grow text-white">
+    <div className="flex-grow text-black">
       <div className="reservoir-h5">{title}</div>
       <div>{source}</div>
     </div>
