@@ -20,7 +20,7 @@ class MyDocument extends Document {
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="KNNY's Market" />
+        <meta name="description" content="KNNYs Market" />
         <meta name="keywords" content="nft, ethereum, protocol" />
         <link rel="shortcut icon" type="image/svg" href="/face.svg" />
         <title>
@@ -28,7 +28,7 @@ class MyDocument extends Document {
         </title>
         <meta
           name="description"
-          content="KNNY's Market"
+          content="KNNYs Market"
         />
         <meta name="keywords" content="NFT, API, Protocol" />
         {/* Twitter */}

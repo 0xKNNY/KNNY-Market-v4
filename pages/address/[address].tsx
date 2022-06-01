@@ -78,7 +78,7 @@ const Address: NextPage<Props> = ({ mode, collectionId }) => {
   const title = META_TITLE ? (
     <title>{META_TITLE}</title>
   ) : (
-    <title>{address} KNNY's Market</title>
+    <title>{address} KNNYs Market</title>
   )
 
   return (
