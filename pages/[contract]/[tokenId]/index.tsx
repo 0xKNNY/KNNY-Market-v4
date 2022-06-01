@@ -144,7 +144,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
   ) : (
     <title>
       {token?.token?.name || `#${token?.token?.tokenId}`} -{' '}
-      {collection.data?.collection?.name} | Reservoir Market
+      {collection.data?.collection?.name} 
     </title>
   )
   const description = META_DESCRIPTION ? (
@@ -252,7 +252,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
         ></model-viewer> */}
         {tokenOpenSea?.extension === null ? (
           <img
-            className="w-full rounded-md"
+            className="w-full border"
             src={optimizeImage(token?.token?.image, 533)}
           />
         ) : (
@@ -261,8 +261,8 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
             tokenImage={optimizeImage(token?.token?.image, 533)}
           />
         )}
-        <article className="col-span-full rounded-md border border-[2px] border-neutral-200 bg-white p-6">
-          <div className="reservoir-h5 mb-4">Collection Info</div>
+        <article className="col-span-full border text background p-6">
+          <div className="reservoir-h5 mb-4 text">Artwork Description</div>
           <Link
             href={
               mode === 'collection'
@@ -277,22 +277,22 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
                   50
                 )}
                 alt="collection avatar"
-                className="h-9 w-9 rounded-full"
+                className="h-9 w-9 rounded-full border"
               />
-              <span className="reservoir-h6">
+              <span className="reservoir-h6 text">
                 {token?.token?.collection?.name}
               </span>
             </a>
           </Link>
           {token?.token?.description && (
-            <div className="reservoir-body-2 mt-4">
+            <div className="reservoir-body-2 mt-4 text">
               {token?.token?.description}
             </div>
           )}
         </article>
-        <article className="col-span-full rounded-md border border-[2px] border-neutral-200 bg-white p-6">
+        <article className="col-span-full background border text p-6">
           <div className="mb-4 flex items-center justify-between">
-            <div className="reservoir-h5">Token Info</div>
+            <div className="reservoir-h5 text">Token Info</div>
             <div className="flex items-center gap-2">
               <a
                 className="reservoir-h6"
@@ -322,10 +322,10 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
           </div>
           {token?.token?.contract && (
             <div className="mb-4 flex items-center justify-between">
-              <div className="reservoir-subtitle">Contract Address</div>
+              <div className="reservoir-subtitle text">Contract Address</div>
               <div>
                 <a
-                  className="reservoir-h6 flex items-center gap-2 text-primary-700"
+                  className="reservoir-h6 flex items-center gap-2 text"
                   target="_blank"
                   rel="noopener noreferrer"
                   href={`https://etherscan.io/address/${token?.token?.contract}`}
@@ -337,17 +337,17 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
             </div>
           )}
           <div className="mb-4 flex items-center justify-between">
-            <div className="reservoir-subtitle">Token ID</div>
-            <div className="reservoir-h6">{token?.token?.tokenId}</div>
+            <div className="reservoir-subtitle text">Token ID</div>
+            <div className="reservoir-h6 text">{token?.token?.tokenId}</div>
           </div>
           <div className="mb-4 flex items-center justify-between">
-            <div className="reservoir-subtitle">Token Standard</div>
-            <div className="reservoir-h6 uppercase">{token?.token?.kind}</div>
+            <div className="reservoir-subtitle text">Token Standard</div>
+            <div className="reservoir-h6 text uppercase">{token?.token?.kind}</div>
           </div>
           <div className="flex items-center justify-between">
-            <div className="reservoir-subtitle">Metadata Refresh</div>
+            <div className="reservoir-subtitle text">Metadata Refresh</div>
             <button
-              className="btn-primary-outline reservoir-h6 ml-auto flex items-center gap-2 p-2 text-primary-700"
+              className="borders reservoir-h6 ml-auto flex items-center gap-2 p-2 text"
               title="Refresh token"
               disabled={refreshLoading}
               onClick={() =>
@@ -367,8 +367,8 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
         </article>
       </article>
       <div className="col-span-full grid content-start gap-4 md:col-span-4 lg:col-span-5">
-        <article className="col-span-full rounded-md border border-[2px] border-neutral-200 bg-white p-6">
-          <div className="reservoir-h3 mb-6 overflow-hidden">
+        <article className="col-span-full border background text p-6">
+          <div className="reservoir-h3 mb-6 overflow-hidden text">
             {token?.token?.name || `#${token?.token?.tokenId}`}
           </div>
 
@@ -385,7 +385,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
             </div>
           )} */}
 
-          <div className="reservoir-h6 mb-2">Owner</div>
+          <div className="reservoir-h6 mb-2 text backround">Owner</div>
           {owner && (
             <Link href={`/address/${owner}`}>
               <a className="inline-block">
@@ -394,8 +394,8 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
             </Link>
           )}
         </article>
-        <article className="col-span-full rounded-md border border-[2px] border-neutral-200 bg-white p-6">
-          <div className="grid grid-cols-2 gap-8">
+        <article className="col-span-full background border p-6">
+          <div className="grid grid-cols-2 gap-8 text">
             <Price
               title="Current Price"
               source={
@@ -403,7 +403,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   href={sourceRedirect}
-                  className="reservoir-body flex items-center gap-2"
+                  className="reservoir-body flex items-center gap-2 text"
                 >
                   on {token?.market?.floorAsk?.source?.name}
                   {
@@ -532,8 +532,8 @@ const Price: FC<{ title: string; price: ReactNode; source?: ReactNode }> = ({
   children,
 }) => (
   <div className="flex flex-col space-y-5">
-    <div className="flex-grow text-black">
-      <div className="reservoir-h5">{title}</div>
+    <div className="flex-grow text">
+      <div className="reservoir-h5 text">{title}</div>
       <div>{source}</div>
     </div>
     <div className="reservoir-h3">{price}</div>
@@ -597,7 +597,7 @@ const Media: FC<{
   // VIDEO
   if (extension === 'mp4') {
     return (
-      <video className="mb-4 w-full" controls>
+      <video className="mb-4 w-full border" controls>
         <source src={animation_url} type="video/mp4" />
         Your browser does not support the
         <code>video</code> element.
@@ -621,7 +621,7 @@ const Media: FC<{
   // 3D
    if (extension === 'gltf' || extension === 'glb') {
      return (
-       <div>
+       <div className="border">
          <model-viewer
          className="w-full"
            src={animation_url}
@@ -641,12 +641,14 @@ const Media: FC<{
   // HTML
   if (extension === 'html' || extension === undefined) {
     return (
-      <iframe
-        className="mb-6 aspect-square w-full"
+      <div className="border">
+        <iframe
+        className="mb-6 aspect-square w-full border"
         height="533"
         width="533"
         src={animation_url}
-      ></iframe>
+      ></iframe> 
+      </div>
     )
   }
 

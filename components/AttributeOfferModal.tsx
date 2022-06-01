@@ -213,7 +213,7 @@ const AttributeOfferModal: FC<Props> = ({
             <>
               <div className="mb-8 space-y-5">
                 <div className="flex items-center justify-between">
-                  <label htmlFor="price" className="reservoir-h6">
+                  <label htmlFor="price" className="reservoir-h6 text">
                     Price (wETH)
                   </label>
                   <input

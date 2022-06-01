@@ -17,6 +17,7 @@
   font-family:"Inter";
   margin-left: -30px; /* gutter size offset */
   width: auto;
+  
 }
 
 .masonry-grid_column {
@@ -28,3 +29,52 @@ model-viewer{
   height:700px;
   background-color: transparent;
   }
+
+/* DARK MODE */
+
+.background
+{
+background: rgb(0, 0, 0);
+}
+
+.border
+{
+  border-color: rgb(255, 255, 255);
+  border: (1px);
+  border-radius: 12px;
+}
+
+.text
+{
+  color:rgb(255, 255, 255);
+}
+
+.text-large
+{
+  font-size: 16pt;
+}
+
+
+/* LIGHT MODE
+
+.background
+{
+background: White;
+}
+
+.border
+{
+  border-color: black;
+  border: (1px);
+  border-radius: 12px;
+}
+
+.text
+{
+  color: black;
+}
+
+.text-large
+{
+  font-size: 16pt;
+} */

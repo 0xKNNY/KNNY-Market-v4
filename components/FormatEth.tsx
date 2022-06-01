@@ -13,7 +13,7 @@ const FormatEth: FC<Props> = ({ amount, maximumFractionDigits, logoWidth }) => {
   return (
     <div className="">
       
-      <span className="flex-grow text-black">{value}</span>
+      <span className="flex-grow text">{value}</span>
     </div>
   )
 }

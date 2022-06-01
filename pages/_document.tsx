@@ -20,16 +20,15 @@ class MyDocument extends Document {
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Reservoir" />
+        <meta name="description" content="KNNY's Market" />
         <meta name="keywords" content="nft, ethereum, protocol" />
-        <link rel="shortcut icon" type="image/svg" href="/reservoir.svg" />
+        <link rel="shortcut icon" type="image/svg" href="/face.svg" />
         <title>
-          Reservoir Market | Open source NFT marketplace powered by Reservoir
-          Protocol
+          KNNY's Market
         </title>
         <meta
           name="description"
-          content="Reservoir Market is an open source NFT marketplace powered by Reservoir"
+          content="KNNY's Market"
         />
         <meta name="keywords" content="NFT, API, Protocol" />
         {/* Twitter */}
@@ -82,7 +81,7 @@ class MyDocument extends Document {
         <meta property="og:image:width" content="1280" />
         <meta property="og:image:height" content="640" />
         <meta property="og:image:alt" content="Reservoir Market banner" />
-        <body className="bg-white text-white">
+        <body className="background text">
           <Main />
           <NextScript />
         </body>

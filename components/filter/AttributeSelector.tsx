@@ -35,10 +35,10 @@ const AttributeSelector: FC<Props> = ({
   }
 
   return (
-    <div className="border-b-[1px] border-gray-300">
+    <div className=" border">
       <div className="relative m-4">
         <FiSearch
-          className={`absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-[#4b5563] ${
+          className={`absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text ${
             query !== '' ? 'text-[#9CA3AF]' : ''
           }`}
         />

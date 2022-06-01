@@ -42,14 +42,14 @@ const Navbar: FC<Props> = ({ communityId, mode }) => {
   const displaySearch = rule1 || rule2
 
   return (
-    <nav className="col-span-full flex gap-2 py-3 sm:py-4 text-black">
+    <nav className="col-span-full flex gap-2 py-3 sm:py-4 text">
       <Link href="/">
         <a className="mr-4 inline-flex items-center gap-3">
-          <img src={logo} alt={logoAlt} className="w-6 sm:block" />
+          
           {title ? (
             <span className="font-semibold">{title}</span>
           ) : (
-            <span className="font-['Obvia'] text-lg">reservoir.market</span>
+            <span className="font-['Obvia'] text-large">market </span>
           )}
         </a>
       </Link>
@@ -66,7 +66,7 @@ const Navbar: FC<Props> = ({ communityId, mode }) => {
                 key={url}
                 href={url}
                 rel="noopener noferrer"
-                className="reservoir-label-l text-[#4B5563] hover:text-[#1F2937]"
+                className="reservoir-label-l text hover:text-[#1F2937]"
               >
                 {name}
               </a>

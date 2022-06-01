@@ -53,12 +53,12 @@ const TokensGrid: FC<Props> = ({
               key={`${token?.collection?.name}${idx}`}
               href={`/${token?.contract}/${token?.tokenId}`}
             >
-              <a className="group mb-6 grid border-[2px] self-start overflow-hidden rounded-[6px] bg-white shadow-neutral-200 transition">
+              <a className="group mb-6 grid border background text self-start overflow-hidden transition">
                 {token?.image ? (
                   <img
                     src={optimizeImage(token?.image, 250)}
                     alt={`${token?.name}`}
-                    className="w-full "
+                    className="w-full"
                     width="250"
                     height="250"
                   />
@@ -69,11 +69,11 @@ const TokensGrid: FC<Props> = ({
                         <img
                           src={optimizeImage(collectionImage, 250)}
                           alt={`${token?.collection?.name}`}
-                          className="mx-auto mb-4 h-16 w-16 overflow-hidden rounded-full border-2 border-white"
+                          className="mx-auto mb-4 h-16 w-16 overflow-hidden background border"
                           width="64"
                           height="64"
                         />
-                        <div className="reservoir-h6 text-black">
+                        <div className="reservoir-h6 text">
                           No Content Available
                         </div>
                       </div>
@@ -89,17 +89,17 @@ const TokensGrid: FC<Props> = ({
                 )}
 
                 <p
-                  className="reservoir-h6 mb-3 overflow-hidden truncate px-6 pt-4 text-black text-[12pt] lg:pt-3"
+                  className="reservoir-h6 mb-3 overflow-hidden truncate px-6 pt-4 text background lg:pt-3"
                   title={token?.name || token?.tokenId}
                 >
                   {token?.name || `#${token?.tokenId}`}
                 </p>
                 <div className="flex items-center justify-between px-6 pb-4 lg:pb-3">
                   <div>
-                    <div className="reservoir-subtitle text-black">
+                    <div className="reservoir-subtitle text">
                       Offer
                     </div>
-                    <div className="reservoir-h6">
+                    <div className="reservoir-h6 text">
                       <FormatEth
                         amount={token?.topBidValue}
                         maximumFractionDigits={4}
@@ -108,10 +108,10 @@ const TokensGrid: FC<Props> = ({
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="reservoir-subtitle text-black">
+                    <div className="reservoir-subtitle text">
                       ETH
                     </div>
-                    <div className="reservoir-h6 text-[16pt] text-black">
+                    <div className="reservoir-h6 text-large text">
                       <FormatEth
                         amount={token?.floorAskPrice}
                         maximumFractionDigits={4}
