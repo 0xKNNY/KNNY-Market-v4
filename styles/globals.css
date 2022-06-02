@@ -39,14 +39,15 @@ background: rgb(0, 0, 0);
 
 .border
 {
-  border-color: rgb(255, 255, 255);
+  border-color: rgba(255, 255, 255, 0.20);
   border: (1px);
-  border-radius: 12px;
+  border-radius: 3px;
 }
 
 .text
 {
   color:rgb(255, 255, 255);
+  font-family: Inter;
 }
 
 .text-large
@@ -77,4 +78,29 @@ background: White;
 .text-large
 {
   font-size: 16pt;
+} */
+
+
+/* test mode 
+.background
+{
+background: rgb(0, 0, 0);
+}
+
+.border
+{
+  border-color: rgb(106, 255, 0);
+  border: (2px);
+  border-radius: 0px;
+}
+
+.text
+{
+  color:rgb(106, 255, 0);
+  font-family: IBM Plex Mono;
+}
+
+.text-large
+{
+  font-size: 20pt;
 } */
