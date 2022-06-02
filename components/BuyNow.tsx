@@ -164,10 +164,10 @@ const BuyNow: FC<Props> = ({
             isInTheWrongNetwork
           }
           onClick={() => taker && tokenString && execute(tokenString, taker)}
-          className="btn-primary-fill w-full text border background"
+          className="btn-primary-outline w-full buy-button border"
         >
           {waitingTx ? (
-            <CgSpinner className="h-4 w-4 animate-spin" />
+            <CgSpinner className="h-4 w-4 animate-spin border" />
           ) : (
             'Buy Now'
           )}

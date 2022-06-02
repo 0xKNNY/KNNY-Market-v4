@@ -347,7 +347,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
           <div className="flex items-center justify-between">
             <div className="reservoir-subtitle text">Metadata Refresh</div>
             <button
-              className="borders reservoir-h6 ml-auto flex items-center gap-2 p-2 text"
+              className="border reservoir-h6 ml-auto flex items-center gap-2 p-2 text"
               title="Refresh token"
               disabled={refreshLoading}
               onClick={() =>

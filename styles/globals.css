@@ -39,9 +39,9 @@ background: rgb(0, 0, 0);
 
 .border
 {
-  border-color: rgba(255, 255, 255, 0.20);
+  border-color: rgb(51, 51, 51);
   border: (1px);
-  border-radius: 3px;
+  border-radius: 0px;
 }
 
 .text
@@ -53,6 +53,13 @@ background: rgb(0, 0, 0);
 .text-large
 {
   font-size: 16pt;
+}
+
+/* also used for wallet button */
+.buy-button
+{
+  color:black;
+  background:rgb(255, 255, 255)
 }
 
 

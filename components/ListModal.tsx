@@ -245,7 +245,7 @@ const ListModal: FC<Props> = ({
             setOrderbook(['reservoir'])
             await checkWallet(signer, setToast, connect, connectData)
           }}
-          className="btn-primary-fill w-full"
+          className="btn-primary-outline w-full border text background"
         >
           {token?.market?.floorAsk?.price ? 'Edit Listing' : 'List for Sale'}
         </button>
