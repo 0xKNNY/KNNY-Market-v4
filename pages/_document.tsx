@@ -24,7 +24,7 @@ class MyDocument extends Document {
         <meta name="keywords" content="nft, ethereum, protocol" />
         <link rel="shortcut icon" type="image/svg" href="/face.svg" />
         <title>
-          KNNY's Market
+          KNNYs Market
         </title>
         <meta
           name="description"
