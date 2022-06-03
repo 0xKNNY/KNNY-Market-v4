@@ -10,7 +10,7 @@ type Props = {
 
 const TokenAttributes = ({ token }: Props) => {
   return (
-    <article className="col-span-full text background border p-6">
+    <article className="col-span-full text background p-6">
       <p className="reservoir-h5 mb-4 text">Attributes</p>
       <div className="grid grid-cols-3 gap-2">
         {token?.attributes?.map(({ key, value }) => (

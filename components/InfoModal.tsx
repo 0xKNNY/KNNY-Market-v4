@@ -7,7 +7,7 @@ const InfoModal: FC = () => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button className="reservoir-h6 whitespace-nowrap text-left text-white hover:underline">
+        <button className="reservoir-h6 whitespace-nowrap text-left text hover:underline">
           Learn More
         </button>
       </Dialog.Trigger>

@@ -38,14 +38,14 @@ const AttributesFlex = () => {
         return (
           <div
             key={key}
-            className="relative flex border"
+            className="relative flex border "
           >
-            <div className="reservoir-label-l flex items-center justify-between gap-1.5 px-4 py-1 lg:py-2">
+            <div className="reservoir-label-l flex text items-center border background justify-between gap-1.5 px-4 py-1 lg:py-2">
               <p className="capitalize">{key}</p>
               <p>{value}</p>
             </div>
             <button
-              className="absolute -top-2.5 -right-2.5 rounded-full bg-neutral-200 p-1 text-neutral-500 transition hover:bg-red-200 hover:text-neutral-900 dark:bg-neutral-700 dark:text-neutral-400 dark:hover:bg-red-700 dark:hover:text-neutral-100"
+              className="absolute -top-2.5 -right-2.5 rounded-full p-1 text border background transition hover:background-hover hover:text-transparent"
               onClick={() => toggleOffAttribute(router, key)}
             >
               <HiX className="h-3.5 w-3.5" />

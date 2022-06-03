@@ -39,9 +39,9 @@ background: rgb(0, 0, 0);
 
 .border
 {
-  border-color: #333333;
+  border-color: white;
   border: (1px);
-  border-radius: 0px;
+  border-radius: 5px;
 }
 
 .text
@@ -50,6 +50,10 @@ background: rgb(0, 0, 0);
   font-family: Inter;
 }
 
+.background-hover {
+
+  background: rgb(255, 255, 255);
+}
 .text-large
 {
   font-size: 16pt;
@@ -58,11 +62,34 @@ background: rgb(0, 0, 0);
 /* also used for wallet button */
 .buy-button
 {
-  color:black;
-  background:rgb(255, 255, 255)
+  color: black;
+  background:white;
 }
 
+.rainbow-text {
+  -webkit-animation: text-color 20s infinite;
+  animation: text-color 1s infinite;
+  -webkit-animation-direction: alternate;
+  animation-direction: alternate;
 
+}
+
+@keyframes text-color {
+  0% {
+      color: #ff0000
+  }
+
+  40% {
+      color: #fff200
+  }
+
+  80% {
+     color: #00ff95
+  }
+  100% {
+      color: #2f00ff
+  }
+}
 /* LIGHT MODE
 
 .background

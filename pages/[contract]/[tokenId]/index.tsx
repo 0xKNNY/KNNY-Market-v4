@@ -234,25 +234,16 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
 
         <Script type='module'
           src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"/>
-
-      {/* TOKEN IMAGE */}
-      <article className="col-span-full grid content-start gap-4 md:col-span-4 lg:col-span-5 lg:col-start-2">
-        {/* TEST MODEL-VIEWER WITH LOCAL FILES */}
-        {/* <model-viewer
-          alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum"
-          src="/NeilArmstrong.glb"
-          ar
-          ar-modes="webxr scene-viewer quick-look"
-          environment-image="https://modelviewer.dev/shared-assets/environments/moon_1k.hdr"
-          poster="/NeilArmstrong.webp"
-          seamless-poster
-          shadow-intensity="1"
-          camera-controls
-          enable-pan
-        ></model-viewer> */}
+        
+        
+        
+        
+        
+        {/*TOKEN IMAGE*/}
+        <article className="col-span-full gap-4 grid">
         {tokenOpenSea?.extension === null ? (
           <img
-            className="w-full border"
+            className="w-full border mb-1"
             src={optimizeImage(token?.token?.image, 533)}
           />
         ) : (
@@ -261,9 +252,159 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
             tokenImage={optimizeImage(token?.token?.image, 533)}
           />
         )}
-        <article className="col-span-full border text background p-6">
-          <div className="reservoir-h5 mb-4 text">Artwork Description</div>
-          <Link
+        </article>
+
+
+{/* FIRST COLUMN STARTS HERE */}
+
+<div className="col-span-full grid content-start gap-4 md:col-span-4 lg:col-span-6 lg:col-start-1">
+
+
+
+{/*TITLE/PRICE/BUY BOX*/}
+
+<article className="col-span-full background p-6">
+<div className="reservoir-h3 mb-6 overflow-hidden text">
+    {token?.token?.name || `#${token?.token?.tokenId}`}
+  </div>
+
+
+  <div className="grid grid-cols-2 gap-8 text">
+    <Price
+      title="Price"
+      source={
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href={sourceRedirect}
+          className="reservoir-body flex items-center gap-2 text"
+        >
+          on {token?.market?.floorAsk?.source?.name}
+          {
+            <img
+              className="h-6 w-6"
+              src={sourceLogo}
+              alt="Source Logo"
+            /> 
+          }
+        </a>
+      }
+      price={ 
+        <FormatEth
+          amount={(token?.market?.floorAsk?.price)}
+          maximumFractionDigits={4}
+          logoWidth={16}
+        />
+      }
+    >
+      {isOwner && (
+        <ListModal
+          data={{
+            collection: collection.data,
+            details,
+          }}
+          isInTheWrongNetwork={isInTheWrongNetwork}
+          maker={accountData?.address}
+          setToast={setToast}
+          signer={signer}
+        />
+      )}
+      <BuyNow
+        data={{
+          collection: collection.data,
+          details,
+        }}
+        signer={signer}
+        isInTheWrongNetwork={isInTheWrongNetwork}
+        setToast={setToast}
+        show={!isOwner}
+      />
+    </Price>
+    <Price
+      title="Top Offer"
+      price={
+        <FormatEth
+          amount={token?.market?.topBid?.value}
+          maximumFractionDigits={4}
+          logoWidth={16}
+        />
+      }
+    >
+      <AcceptOffer
+        data={{
+          collection: collection.data,
+          details,
+        }}
+        isInTheWrongNetwork={isInTheWrongNetwork}
+        setToast={setToast}
+        show={isOwner}
+        signer={signer}
+      />
+      {!isOwner && (
+        <TokenOfferModal
+          signer={signer}
+          data={{
+            collection: collection.data,
+            details,
+          }}
+          royalties={{
+            bps: collection.data?.collection?.royalties?.bps,
+            recipient:
+              collection.data?.collection?.royalties?.recipient,
+          }}
+          env={{
+            chainId: +chainId as ChainId,
+            openSeaApiKey,
+          }}
+          setToast={setToast}
+        />
+      )}
+    </Price>
+  </div>
+  <div
+    className={`${
+      (isOwner && isListed) || isTopBidder ? 'mt-6' : ''
+    } flex justify-center`}
+  >
+    <CancelOffer
+      data={{
+        collection: collection.data,
+        details,
+      }}
+      maker={accountData?.address.toLowerCase()}
+      signer={signer}
+      show={isTopBidder}
+      isInTheWrongNetwork={isInTheWrongNetwork}
+      setToast={setToast}
+    />
+    <CancelListing
+      data={{
+        collection: collection.data,
+        details,
+      }}
+      maker={accountData?.address.toLowerCase()}
+      signer={signer}
+      show={isOwner && isListed}
+      isInTheWrongNetwork={isInTheWrongNetwork}
+      setToast={setToast}
+    />
+  </div>
+</article>
+<Listings asks={asks} />
+
+</div>
+
+
+
+        {/* SECOND COLUMN STARTS HERE*/}
+      
+        <article className="col-span-full grid content-start gap-4 md:col-span-4 lg:col-span-6 lg:col-start-7">
+
+         {/* DESCRIPTION */}
+
+        <article className="col-span-full text background p-6">
+          <div className="reservoir-h5 mb-4 text">Description</div>
+          {/*<Link
             href={
               mode === 'collection'
                 ? '/'
@@ -283,16 +424,22 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
                 {token?.token?.collection?.name}
               </span>
             </a>
-          </Link>
+                </Link> */}
+
+
           {token?.token?.description && (
             <div className="reservoir-body-2 mt-4 text">
               {token?.token?.description}
             </div>
           )}
         </article>
-        <article className="col-span-full background border text p-6">
+
+
+        {/* NFT DETAILS */}
+        
+        <article className="col-span-full background text p-6">
           <div className="mb-4 flex items-center justify-between">
-            <div className="reservoir-h5 text">Token Info</div>
+            <div className="reservoir-h5 text">✓ NFT Details</div>
             <div className="flex items-center gap-2">
               <a
                 className="reservoir-h6"
@@ -320,6 +467,29 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
               </a>
             </div>
           </div>
+
+          {/* OWNER */}
+
+          <div className="mb-4 flex items-center reservoir-subtitle  text justify-between">
+          <div className="mb-4 flex items-center reservoir-subtitle  text justify-between">Owner</div>
+          <div>
+                <a>
+                   {owner && (
+                    <Link href={`https://etherscan.io/address/${owner}`}>
+                      <a className="reservoir-h6 flex items-center gap-2 text"
+                          target="_blank"
+                        rel="noopener noreferrer">
+                        <EthAccount address={owner} side="right"/>
+                      </a>
+                    </Link>
+                  )}
+                </a>
+              </div>
+              </div>
+
+
+          {/* CONTRACT ADDRESS */}
+
           {token?.token?.contract && (
             <div className="mb-4 flex items-center justify-between">
               <div className="reservoir-subtitle text">Contract Address</div>
@@ -336,14 +506,23 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
               </div>
             </div>
           )}
+
+          {/* TOKEN ID */}
+
           <div className="mb-4 flex items-center justify-between">
             <div className="reservoir-subtitle text">Token ID</div>
             <div className="reservoir-h6 text">{token?.token?.tokenId}</div>
           </div>
+
+          {/* TOKEN STANDARD */}
+
           <div className="mb-4 flex items-center justify-between">
             <div className="reservoir-subtitle text">Token Standard</div>
             <div className="reservoir-h6 text uppercase">{token?.token?.kind}</div>
           </div>
+
+          {/* REFRESH BUTTON */}
+
           <div className="flex items-center justify-between">
             <div className="reservoir-subtitle text">Metadata Refresh</div>
             <button
@@ -365,160 +544,11 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
             </button>
           </div>
         </article>
-      </article>
-      <div className="col-span-full grid content-start gap-4 md:col-span-4 lg:col-span-5">
-        <article className="col-span-full border background text p-6">
-          <div className="reservoir-h3 mb-6 overflow-hidden text">
-            {token?.token?.name || `#${token?.token?.tokenId}`}
-          </div>
 
-          {/* {token?.token?.kind === 'erc1155' && (
-            <div className="mb-4 flex justify-evenly">
-              <div className="flex items-center gap-2">
-                <FiUsers className="h-4 w-4" />
-                <span className="reservoir-h5">Owners</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <FiDatabase className="h-4 w-4" />
-                <span className="reservoir-h5">Total</span>
-              </div>
-            </div>
-          )} */}
+        {/* ATTRIBUTES */}
 
-          <div className="reservoir-h6 mb-2 text backround">Owner</div>
-          {owner && (
-            <Link href={`/address/${owner}`}>
-              <a className="inline-block">
-                <EthAccount address={owner} side="left" />
-              </a>
-            </Link>
-          )}
-        </article>
-        <article className="col-span-full background border p-6">
-          <div className="grid grid-cols-2 gap-8 text">
-            <Price
-              title="Current Price"
-              source={
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={sourceRedirect}
-                  className="reservoir-body flex items-center gap-2 text"
-                >
-                  on {token?.market?.floorAsk?.source?.name}
-                  {
-                    <img
-                      className="h-6 w-6"
-                      src={sourceLogo}
-                      alt="Source Logo"
-                    />
-                  }
-                </a>
-              }
-              price={
-                <FormatEth
-                  amount={token?.market?.floorAsk?.price}
-                  maximumFractionDigits={4}
-                  logoWidth={16}
-                />
-              }
-            >
-              {isOwner && (
-                <ListModal
-                  data={{
-                    collection: collection.data,
-                    details,
-                  }}
-                  isInTheWrongNetwork={isInTheWrongNetwork}
-                  maker={accountData?.address}
-                  setToast={setToast}
-                  signer={signer}
-                />
-              )}
-              <BuyNow
-                data={{
-                  collection: collection.data,
-                  details,
-                }}
-                signer={signer}
-                isInTheWrongNetwork={isInTheWrongNetwork}
-                setToast={setToast}
-                show={!isOwner}
-              />
-            </Price>
-            <Price
-              title="Top Offer"
-              price={
-                <FormatEth
-                  amount={token?.market?.topBid?.value}
-                  maximumFractionDigits={4}
-                  logoWidth={16}
-                />
-              }
-            >
-              <AcceptOffer
-                data={{
-                  collection: collection.data,
-                  details,
-                }}
-                isInTheWrongNetwork={isInTheWrongNetwork}
-                setToast={setToast}
-                show={isOwner}
-                signer={signer}
-              />
-              {!isOwner && (
-                <TokenOfferModal
-                  signer={signer}
-                  data={{
-                    collection: collection.data,
-                    details,
-                  }}
-                  royalties={{
-                    bps: collection.data?.collection?.royalties?.bps,
-                    recipient:
-                      collection.data?.collection?.royalties?.recipient,
-                  }}
-                  env={{
-                    chainId: +chainId as ChainId,
-                    openSeaApiKey,
-                  }}
-                  setToast={setToast}
-                />
-              )}
-            </Price>
-          </div>
-          <div
-            className={`${
-              (isOwner && isListed) || isTopBidder ? 'mt-6' : ''
-            } flex justify-center`}
-          >
-            <CancelOffer
-              data={{
-                collection: collection.data,
-                details,
-              }}
-              maker={accountData?.address.toLowerCase()}
-              signer={signer}
-              show={isTopBidder}
-              isInTheWrongNetwork={isInTheWrongNetwork}
-              setToast={setToast}
-            />
-            <CancelListing
-              data={{
-                collection: collection.data,
-                details,
-              }}
-              maker={accountData?.address.toLowerCase()}
-              signer={signer}
-              show={isOwner && isListed}
-              isInTheWrongNetwork={isInTheWrongNetwork}
-              setToast={setToast}
-            />
-          </div>
-        </article>
-        <Listings asks={asks} />
         <TokenAttributes token={token?.token} />
-      </div>
+      </article>
     </Layout>
   )
 }
@@ -532,11 +562,11 @@ const Price: FC<{ title: string; price: ReactNode; source?: ReactNode }> = ({
   children,
 }) => (
   <div className="flex flex-col space-y-5">
-    <div className="flex-grow text">
+    <div className="flex-grow">
       <div className="reservoir-h5 text">{title}</div>
       <div>{source}</div>
     </div>
-    <div className="reservoir-h3">{price}</div>
+    <div className="reservoir-h3 rainbow-text">{price}</div>
     {children}
   </div>
 )
