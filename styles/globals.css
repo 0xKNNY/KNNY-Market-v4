@@ -41,7 +41,7 @@ background: rgb(0, 0, 0);
 {
   border-color: white;
   border: (1px);
-  border-radius: 5px;
+  border-radius: 0px;
 }
 
 .text
