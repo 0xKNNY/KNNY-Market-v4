@@ -107,17 +107,24 @@ const TokensGrid: FC<Props> = ({
                       />
                     </div>
                   </div>
-                  <div className="text-right">
+
+                  
+                  <div className="text-right"></div>
+                    <div className="reservoir-subtitle text-right text">
                     <div className="reservoir-subtitle text">
-                      ETH
+                      Price
                     </div>
+                   <div className="flex">
                     <div className="reservoir-h6 text-large text">
                       <FormatEth
                         amount={token?.floorAskPrice}
                         maximumFractionDigits={4}
                         logoWidth={7}
                       />
+                    </div> 
+                    <div className="text-large">  ETH</div>
                     </div>
+
                   </div>
                 </div>
               </a> 

@@ -566,7 +566,10 @@ const Price: FC<{ title: string; price: ReactNode; source?: ReactNode }> = ({
       <div className="reservoir-h5 text">{title}</div>
       <div>{source}</div>
     </div>
-    <div className="reservoir-h3 rainbow-text">{price}</div>
+    <div className="flex">
+    <div className="reservoir-h3 text">{price}</div>
+    <div className="reservoir-h3 text">  ETH</div>
+    </div>
     {children}
   </div>
 )
