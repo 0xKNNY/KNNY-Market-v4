@@ -272,7 +272,7 @@ const TokenOfferModal: FC<Props> = ({ env, royalties, data, setToast }) => {
           setOrderbook(['reservoir'])
           await checkWallet(signer, setToast, connect, connectData)
         }}
-        className="btn-primary-outline border text w-full"
+        className="btn-primary-outline text border w-full"
       >
         Make Offer
       </Dialog.Trigger>
@@ -296,7 +296,7 @@ const TokenOfferModal: FC<Props> = ({ env, royalties, data, setToast }) => {
                 className="btn-primary-fill w-full"
               >
                 {waitingTx ? (
-                  <CgSpinner className="h-4 w-4 animate-spin" />
+                  <CgSpinner className="h-4 w-4 buy-button animate-spin" />
                 ) : (
                   'Make Offer'
                 )}
@@ -305,7 +305,7 @@ const TokenOfferModal: FC<Props> = ({ env, royalties, data, setToast }) => {
           >
             <div className="mb-8 space-y-5">
               <div className="flex items-center justify-between">
-                <label htmlFor="price" className="reservoir-h6">
+                <label htmlFor="price" className="reservoir-h6 text">
                   Price (wETH)
                 </label>
                 <input
@@ -327,7 +327,7 @@ const TokenOfferModal: FC<Props> = ({ env, royalties, data, setToast }) => {
                 />
               </div>
               <div className="flex items-center gap-3">
-                <label htmlFor="postOpenSea" className="reservoir-h6">
+                <label htmlFor="postOpenSea" className="reservoir-h6 text">
                   Post offer to OpenSea
                 </label>
                 <input
@@ -347,8 +347,8 @@ const TokenOfferModal: FC<Props> = ({ env, royalties, data, setToast }) => {
                 />
               </div>
               <div className="flex justify-between">
-                <div className="reservoir-h6">Fees</div>
-                <div className="reservoir-body text-right">
+                <div className="reservoir-h6 text">Fees</div>
+                <div className="reservoir-body text-right text">
                   <div>Royalty {royaltyPercentage}</div>
                   {postOnOpenSea && (
                     <div>
@@ -358,7 +358,7 @@ const TokenOfferModal: FC<Props> = ({ env, royalties, data, setToast }) => {
                 </div>
               </div>
               <div className="flex justify-between">
-                <div className="reservoir-h6">Total Cost</div>
+                <div className="reservoir-h6 text">Total Cost</div>
                 <div className="reservoir-h6">
                   <FormatEth
                     amount={calculations.total}
@@ -368,7 +368,7 @@ const TokenOfferModal: FC<Props> = ({ env, royalties, data, setToast }) => {
                 </div>
               </div>
               {postOnOpenSea && (
-                <div className="reservoir-small">
+                <div className="reservoir-small text">
                   <sup>*</sup>OpenSea fee is taken out of the above amount if
                   item is sold on OpenSea.
                 </div>

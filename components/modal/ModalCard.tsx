@@ -68,15 +68,15 @@ const ModalCard: FC<Props> = ({
   const modalTitle = steps && orderbook ? orderbookTitle : title
 
   return (
-    <Dialog.Content className="fixed inset-0 bg-[#000000b6]">
-      <div className="fixed top-1/2 left-1/2 w-[460px] -translate-x-1/2 -translate-y-1/2 transform rounded-md bg-white p-11 shadow-md ">
-        <div className="mb-4 flex items-center justify-between">
-          <Dialog.Title className="reservoir-h4">{modalTitle}</Dialog.Title>
+    <Dialog.Content className="fixed inset-0 p-11 bg-[#000000b6]">
+      <div className="border lg:w-[460px] md:w-[460px] w-full sm:h-fit transform text background p-11 shadow-md ">
+        <div className="mb-4 flex center justify-between">
+          <Dialog.Title className="reservoir-h4 text">{modalTitle}</Dialog.Title>
           <Dialog.Close
             onClick={onCloseCallback}
-            className="btn-primary-outline p-1.5"
+            className="btn-primary-outline text p-1.5"
           >
-            <HiX className="h-5 w-5" />
+            <HiX className="h-5 w-5 " />
           </Dialog.Close>
         </div>
         {data && (
@@ -134,7 +134,7 @@ const ModalCard: FC<Props> = ({
           <div className="flex gap-4">
             <Dialog.Close
               onClick={onCloseCallback}
-              className="btn-primary-outline w-full"
+              className="btn-primary-outline text border w-full"
             >
               Cancel
             </Dialog.Close>

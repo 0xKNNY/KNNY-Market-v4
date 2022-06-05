@@ -17,7 +17,7 @@ const ExpirationSelector: FC<Props> = ({
 }) => {
   return (
     <>
-      <label htmlFor="expirationSelector" className="reservoir-h6 mb-2">
+      <label htmlFor="expirationSelector" className="reservoir-h6 text mb-2">
         Expiration
       </label>
 

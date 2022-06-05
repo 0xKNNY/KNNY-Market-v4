@@ -16,7 +16,7 @@ const ConnectWallet: FC = () => {
   if (accountData) {
     return (
       <DropdownMenu.Root>
-        <DropdownMenu.Trigger className="btn-primary-outline ml-auto border text background normal-case">
+        <DropdownMenu.Trigger className="btn-primary-outline ml-auto connect-button-connected normal-case">
           {loading ? (
             <div className="background h-[32px] w-[115px] animate-pulse border text"></div>
           ) : (
@@ -67,7 +67,7 @@ const ConnectWallet: FC = () => {
     <button
       key={wallet.id}
       onClick={() => connect(wallet)}
-      className="btn-primary-outline col-span-2 bg-white text-black border col-start-3 ml-auto md:col-span-4 md:col-start-5 lg:col-span-4 lg:col-start-9"
+      className="btn-primary-outline col-span-2 connect-button col-start-3 ml-auto md:col-span-4 md:col-start-5 lg:col-span-4 lg:col-start-9"
     >
       Connect Wallet
     </button>

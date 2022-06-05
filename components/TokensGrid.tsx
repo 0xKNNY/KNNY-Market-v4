@@ -7,6 +7,8 @@ import { useInView } from 'react-intersection-observer'
 import FormatEth from './FormatEth'
 import Masonry from 'react-masonry-css'
 import { paths } from '@reservoir0x/client-sdk'
+import { getCollection } from 'lib/fetch/fetch'
+import CollectionsGrid from './CollectionsGrid'
 
 type Props = {
   tokens: SWRInfiniteResponse<
@@ -87,6 +89,7 @@ const TokensGrid: FC<Props> = ({
                     />
                   </div>
                 )}
+                
 
                 <p
                   className="reservoir-h6 mb-3 overflow-hidden truncate px-6 pt-4 text background lg:pt-3"
@@ -94,8 +97,8 @@ const TokensGrid: FC<Props> = ({
                 >
                   {token?.name || `#${token?.tokenId}`}
                 </p>
-                <div className="flex items-center justify-between px-6 pb-4 lg:pb-3">
-                  <div>
+                <div className="flex items-center px-6 pb-4 lg:pb-3">
+                  {/*<div>
                     <div className="reservoir-subtitle text">
                       Offer
                     </div>
@@ -106,13 +109,13 @@ const TokensGrid: FC<Props> = ({
                         logoWidth={7}
                       />
                     </div>
-                  </div>
+                  </div>*/}
 
                   
                   <div className="text-right"></div>
-                    <div className="reservoir-subtitle text-right text">
+                    <div className="reservoir-subtitle text-left text">
                     <div className="reservoir-subtitle text">
-                      Price
+                      Buy Now
                     </div>
                    <div className="flex">
                     <div className="reservoir-h6 text-large text">

@@ -39,9 +39,26 @@ background: rgb(0, 0, 0);
 
 .border
 {
-  border-color: white;
-  border: (1px);
+  border-color: rgb(255, 255, 255);
+  border-width: 1px;
   border-radius: 0px;
+}
+
+.connect-button
+{
+  background:white;
+  border-radius: 100px;
+  font-family: Inter;
+  font-weight: 500;
+}
+
+.connect-button-connected
+{
+  background:rgb(0, 0, 0);
+  color: white;
+  border-radius: 100px;
+  font-family: Inter;
+  font-weight: 500;
 }
 
 .text
@@ -59,7 +76,22 @@ background: rgb(0, 0, 0);
   font-size: 16pt;
 }
 
-/* also used for wallet button */
+.vertical-align
+{
+  padding-top: auto;
+  padding-bottom: auto;
+}
+.center {
+  align-content: center;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.margin {
+
+  
+}
 .buy-button
 {
   color: black;

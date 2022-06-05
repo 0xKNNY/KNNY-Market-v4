@@ -200,7 +200,7 @@ const AttributeOfferModal: FC<Props> = ({
                   waitingTx
                 }
                 onClick={execute}
-                className="btn-primary-fill w-full"
+                className="btn-primary-fill connect-button w-full"
               >
                 {waitingTx ? (
                   <CgSpinner className="h-4 w-4 animate-spin" />

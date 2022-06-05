@@ -24,6 +24,7 @@ import useDetails from 'hooks/useDetails'
 import useCollection from 'hooks/useCollection'
 import { paths } from '@reservoir0x/client-sdk'
 import {
+  FiAlignCenter,
   FiDatabase,
   FiExternalLink,
   FiRefreshCcw,
@@ -32,6 +33,7 @@ import {
 import useAsks from 'hooks/useAsks'
 import Listings from 'components/token/Listings'
 import Script from 'next/script'
+import { safeTruncate } from '@datadog/browser-core'
 
 // Environment variables
 // For more information about these variables
@@ -240,10 +242,11 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
         
         
         {/*TOKEN IMAGE*/}
-        <article className="col-span-full gap-4 grid">
-        {tokenOpenSea?.extension === null ? (
+        <div className="col-span-full md:h-[1000px] lg:h-[1000px]">
+          <article className="md:h-[1000px] center lg:h-[1000px] w-full gap-4 grid">
+          {tokenOpenSea?.extension === null ? (
           <img
-            className="w-full border mb-1"
+            className="mb-1 center w-fit md:h-[1000px] lg:h-[1000px]"
             src={optimizeImage(token?.token?.image, 533)}
           />
         ) : (
@@ -252,7 +255,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
             tokenImage={optimizeImage(token?.token?.image, 533)}
           />
         )}
-        </article>
+        </article></div>
 
 
 {/* FIRST COLUMN STARTS HERE */}
@@ -264,14 +267,17 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
 {/*TITLE/PRICE/BUY BOX*/}
 
 <article className="col-span-full background p-6">
-<div className="reservoir-h3 mb-6 overflow-hidden text">
+<div className="reservoir-h2 mb-0 w-fit overflow-hidden text">
     {token?.token?.name || `#${token?.token?.tokenId}`}
   </div>
+
+<div className="text-sm flex mb-2">created by<div>  {COLLECTION}</div></div>
+ <br></br>
 
 
   <div className="grid grid-cols-2 gap-8 text">
     <Price
-      title="Price"
+      title="Buy Now"
       source={
         <a
           target="_blank"
@@ -279,14 +285,14 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
           href={sourceRedirect}
           className="reservoir-body flex items-center gap-2 text"
         >
-          on {token?.market?.floorAsk?.source?.name}
+          {/*on {token?.market?.floorAsk?.source?.name}
           {
             <img
               className="h-6 w-6"
               src={sourceLogo}
               alt="Source Logo"
             /> 
-          }
+          } */}
         </a>
       }
       price={ 
@@ -321,7 +327,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
       />
     </Price>
     <Price
-      title="Top Offer"
+      title="Offer"
       price={
         <FormatEth
           amount={token?.market?.topBid?.value}
@@ -545,9 +551,10 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
           </div>
         </article>
 
-        {/* ATTRIBUTES */}
+        {/* ATTRIBUTES 
 
         <TokenAttributes token={token?.token} />
+        */}
       </article>
     </Layout>
   )
@@ -630,7 +637,7 @@ const Media: FC<{
   // VIDEO
   if (extension === 'mp4') {
     return (
-      <video className="mb-4 w-full border" controls autoPlay loop>
+      <video className="mb-4 w-full  lg:h-[1000px] md:h-[1000px]" controls autoPlay loop>
         <source src={animation_url} type="video/mp4" />
         Your browser does not support the
         <code>video</code> element.
@@ -654,7 +661,7 @@ const Media: FC<{
   // 3D
    if (extension === 'gltf' || extension === 'glb') {
      return (
-       <div className="border">
+       <div className="mb-4 w-full ">
          <model-viewer
          className="w-full"
            src={animation_url}
@@ -666,18 +673,17 @@ const Media: FC<{
            shadow-intensity="0"
            camera-controls
            enable-pan
-           
          ></model-viewer>
        </div>
      )
    }
 
   // HTML
-  if (extension === 'html' || extension === undefined) {
+  if (extension === 'html' || extension === 'gif' || undefined) {
     return (
-      <div className="border">
+      <div className="w-full">
         <iframe
-        className="mb-6 aspect-square w-full border"
+        className="mb-4 w-full"
         height="533"
         width="533"
         src={animation_url}
