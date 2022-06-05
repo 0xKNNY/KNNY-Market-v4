@@ -26,7 +26,7 @@ const ExpirationSelector: FC<Props> = ({
         id="expirationSelector"
         defaultValue={expiration}
         onChange={(e) => setExpiration(e.target.value)}
-        className="input-primary-outline"
+        className="input-primary-outline border background"
       >
         {presets.map(({ preset, display }) => (
           <option key={preset} value={preset}>

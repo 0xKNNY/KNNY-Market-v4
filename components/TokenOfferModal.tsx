@@ -293,7 +293,7 @@ const TokenOfferModal: FC<Props> = ({ env, royalties, data, setToast }) => {
                   waitingTx
                 }
                 onClick={execute}
-                className="btn-primary-fill w-full"
+                className="buy-button w-full"
               >
                 {waitingTx ? (
                   <CgSpinner className="h-4 w-4 buy-button animate-spin" />
@@ -316,7 +316,7 @@ const TokenOfferModal: FC<Props> = ({ env, royalties, data, setToast }) => {
                   step={0.01}
                   value={offerPrice}
                   onChange={(e) => setOfferPrice(e.target.value)}
-                  className="input-primary-outline w-[160px]"
+                  className="input-primary-outline border background w-[160px]"
                 />
               </div>
               <div className="flex items-center justify-between">
@@ -374,7 +374,7 @@ const TokenOfferModal: FC<Props> = ({ env, royalties, data, setToast }) => {
                 </div>
               )}
               {calculations.error && (
-                <div className="rounded-md bg-red-100 px-2 py-1 text-red-900">
+                <div className=" px-2 py-1 background text border">
                   {calculations.error}
                 </div>
               )}
