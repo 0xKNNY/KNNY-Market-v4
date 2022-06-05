@@ -70,6 +70,17 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
   const collection = useCollection(undefined, collectionId)
   const [refreshLoading, setRefreshLoading] = useState(false)
 
+  const details = useDetails({
+    tokens: [
+      `${router.query?.contract?.toString()}:${router.query?.tokenId?.toString()}`,
+    ],
+  })
+  const asks = useAsks(
+    undefined,
+    details.data?.tokens?.[0]?.token?.kind,
+    `${details.data?.tokens?.[0]?.token?.contract}:${details.data?.tokens?.[0]?.token?.tokenId}`
+  )
+  
   const contract = router.query?.contract?.toString()
   const tokenId = router.query?.tokenId?.toString()
 
@@ -106,17 +117,6 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
 
     getOpenSeaData(urlOpenSea)
   }, [])
-
-  const details = useDetails({
-    tokens: [
-      `${router.query?.contract?.toString()}:${router.query?.tokenId?.toString()}`,
-    ],
-  })
-  const asks = useAsks(
-    undefined,
-    details.data?.tokens?.[0]?.token?.kind,
-    `${details.data?.tokens?.[0]?.token?.contract}:${details.data?.tokens?.[0]?.token?.tokenId}`
-  )
 
   if (details.error || !chainId) {
     console.debug({ chainId })
