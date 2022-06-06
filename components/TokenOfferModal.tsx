@@ -384,7 +384,7 @@ const TokenOfferModal: FC<Props> = ({ env, royalties, data, setToast }) => {
                 </div>
               )}
             </div>
-          </ModalCard>
+          </ModalCard> 
         </Dialog.Overlay>
       </Dialog.Portal>
     </Dialog.Root>

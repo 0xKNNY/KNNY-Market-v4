@@ -673,6 +673,8 @@ const Media: FC<{
            shadow-intensity="0"
            camera-controls
            enable-pan
+           autoPlay
+           camera-orbit="-68.55deg 80.74deg auto"
          ></model-viewer>
        </div>
      )

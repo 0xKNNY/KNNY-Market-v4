@@ -20,10 +20,6 @@
   
 }
 
-.align-right{
-
-  align-content: right;
-}
 .masonry-grid_column {
   padding-left: 30px; /* gutter size */
   background-clip: padding-box;
