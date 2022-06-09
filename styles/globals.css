@@ -102,6 +102,10 @@ background: rgb(0, 0, 0);
 
 }
 
+.scrollable-element::-webkit-scrollbar {
+  color: transparent;
+}
+
 @keyframes text-color {
   0% {
       color: #ff0000

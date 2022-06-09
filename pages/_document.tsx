@@ -14,7 +14,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html>
+      <Html className="scrollable-element">
         <Head />
         {/* Must  */}
         <meta charSet="utf-8" />
