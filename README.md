@@ -1,4 +1,6 @@
-# Reservoir Sample Marketplace
+![screenshot](/public/screenshot.png)
+
+# KNNY Marketplace
 
 This repo is designed to help you quickly get started building on top of [Reservoir](https://reservoirprotocol.github.io/), a web3-native order book protocol.
 
