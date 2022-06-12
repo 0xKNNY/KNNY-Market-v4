@@ -11,14 +11,6 @@
   font-weight: 400 500 700;
 }
 
-@font-face {
-  font-family: 'IBM Plex Sans';
-  src: url('/fonts/IBMPlexSans/IBMPlexSans-regular.woff2') format('woff2'),
-  url('/fonts/IBMPlexSans/IBMPlexSans-regular.woff2') format('woff2');
-  font-display: swap;
-  font-weight: 400 500 700;
-}
-
 .masonry-grid {
   display: -webkit-box; /* Not needed if autoprefixing */
   display: -ms-flexbox; /* Not needed if autoprefixing */
@@ -50,7 +42,7 @@ background: rgb(0, 0, 0);
 {
   border-color: #414141;
   border-width: 1px;
-  border-radius: 12px;
+  border-radius: 0px;
   
 }
 
@@ -74,7 +66,7 @@ background: rgb(0, 0, 0);
 .text
 {
   color:rgb(255, 255, 255);
-  font-family: IBM Plex Mono;
+  font-family: Inter;
 }
 
 .heading
@@ -108,8 +100,14 @@ background: rgb(0, 0, 0);
 .buy-button
 {
   color: black;
-  background:white;
-  font-weight: 900;
+  background:rgb(255, 255, 255);
+  border-radius: 0;
+}
+
+.makeoffer-button
+{
+  color: rgb(255, 255, 255);
+  border-radius: 0;
 }
 
 .rainbow-text {

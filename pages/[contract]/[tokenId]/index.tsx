@@ -88,7 +88,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
     `/api/v1/asset/${contract}/${tokenId}`,
     'https://api.opensea.io/'
   )
-  
+
   const token = details.data?.tokens?.[0]
   const isOwner =
     token?.token?.owner?.toLowerCase() === accountData?.address.toLowerCase()
@@ -278,7 +278,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
  <br></br>
 
 
-  <div className="grid grid-cols-2 gap-8 p-4 border text">
+  <div className="grid grid-cols-2 gap-4  text">
     <Price
       title="Buy Now"
       source={
@@ -490,11 +490,11 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
           <div>
                 <a>
                    {owner && (
-                    <Link href={`https://etherscan.io/address/${owner}`}>
+                    <Link href={`https://chat.blockscan.com/index?a=${owner}`}>
                       <a className="reservoir-h6 flex items-center gap-2 text"
                           target="_blank"
                         rel="noopener noreferrer">
-                        View owner
+                        Message owner
                       </a>
                     </Link>
                   )}

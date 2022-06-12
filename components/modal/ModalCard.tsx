@@ -119,7 +119,7 @@ const ModalCard: FC<Props> = ({
         {steps ? <Steps steps={steps} /> : children}
         {success ? (
           orderbook && orderbook?.length > 1 ? (
-            <button onClick={onContinue} className="btn-primary-fill w-full">
+            <button onClick={onContinue} className="btn-primary-fill border w-full">
               Continue
             </button>
           ) : (
