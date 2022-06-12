@@ -92,7 +92,7 @@ const TokensGrid: FC<Props> = ({
                 
 
                 <p
-                  className="reservoir-h6 mb-3 overflow-hidden truncate px-6 pt-4 text background lg:pt-3"
+                  className="reservoir-h6 mb-3 overflow-hidden truncate px-6 pt-4 heading background lg:pt-3"
                   title={token?.name || token?.tokenId}
                 >
                   {token?.name || `#${token?.tokenId}`}

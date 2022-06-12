@@ -230,6 +230,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
         {title}
         {description}
         {image}  
+        
       </Head>
       <Script type='module'
           src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"/>
@@ -267,7 +268,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
 {/*TITLE/PRICE/BUY BOX*/}
 
 <article className="col-span-full background p-6">
-<div className="reservoir-h2 mb-0 w-fit overflow-hidden text">
+<div className="reservoir-h2 mb-0 w-fit overflow-hidden heading">
     {token?.token?.name || `#${token?.token?.tokenId}`}
   </div>
 
@@ -275,7 +276,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
  <br></br>
 
 
-  <div className="grid grid-cols-2 gap-8 text">
+  <div className="grid grid-cols-2 gap-8 p-4 border text">
     <Price
       title="Buy Now"
       source={
@@ -283,7 +284,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
           target="_blank"
           rel="noopener noreferrer"
           href={sourceRedirect}
-          className="reservoir-body flex items-center gap-2 text"
+          className=" flex items-center gap-2 "
         >
           {/*on {token?.market?.floorAsk?.source?.name}
           {
@@ -409,7 +410,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
          {/* DESCRIPTION */}
 
         <article className="col-span-full text background p-6">
-          <div className="reservoir-h5 mb-4 text">Description</div>
+          <div className="reservoir-h5 mb-4 text">&gt; Description</div>
           {/*<Link
             href={
               mode === 'collection'
@@ -445,39 +446,45 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
         
         <article className="col-span-full background text p-6">
           <div className="mb-4 flex items-center justify-between">
-            <div className="reservoir-h5 text">✓ NFT Details</div>
-            <div className="flex items-center gap-2">
-              <a
-                className="reservoir-h6"
+            <div className="reservoir-h5 text">&gt; NFT Details</div>
+          </div>
+
+          {/* LOOKSRARE LINK */}
+
+          <div className="mb-4 flex items-center reservoir-subtitle text justify-between">
+          <div>
+          <a
+                className="reservoir-h6 flex items-center gap-2 text"
                 target="_blank"
                 rel="noopener noreferrer"
                 href={`https://looksrare.org/collections/${token?.token?.contract}/${token?.token?.tokenId}`}
               >
-                <img
-                  src="/icons/LooksRare.svg"
-                  alt="LooksRare Icon"
-                  className="h-6 w-6"
-                />
+               View on LooksRare
               </a>
-              <a
-                className="reservoir-h6"
+              </div>
+              </div>
+
+
+
+          {/* OPENSEA LINK */}
+
+          <div className="mb-4 flex items-center reservoir-subtitle text justify-between">
+          <div>
+          <a
+                className="reservoir-h6 flex items-center gap-2 text"
                 target="_blank"
                 rel="noopener noreferrer"
                 href={`https://opensea.io/assets/${token?.token?.contract}/${token?.token?.tokenId}`}
               >
-                <img
-                  src="/icons/OpenSea.svg"
-                  alt="OpenSea Icon"
-                  className="h-6 w-6"
-                />
+              View on OpenSea
               </a>
-            </div>
-          </div>
+              </div>
+              </div>
+
+
 
           {/* OWNER */}
-
-          <div className="mb-4 flex items-center reservoir-subtitle  text justify-between">
-          <div className="mb-4 flex items-center reservoir-subtitle  text justify-between">Owner</div>
+              <div className="mb-4 flexitems-center reservoir-subtitle text justify-between">
           <div>
                 <a>
                    {owner && (
@@ -485,7 +492,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
                       <a className="reservoir-h6 flex items-center gap-2 text"
                           target="_blank"
                         rel="noopener noreferrer">
-                        <EthAccount address={owner} side="right"/>
+                        View owner
                       </a>
                     </Link>
                   )}
@@ -498,7 +505,6 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
 
           {token?.token?.contract && (
             <div className="mb-4 flex items-center justify-between">
-              <div className="reservoir-subtitle text">Contract Address</div>
               <div>
                 <a
                   className="reservoir-h6 flex items-center gap-2 text"
@@ -506,8 +512,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
                   rel="noopener noreferrer"
                   href={`https://etherscan.io/address/${token?.token?.contract}`}
                 >
-                  {shrinkAddress(token?.token?.contract)}
-                  <FiExternalLink className="h-4 w-4" />
+                  View on Etherscan
                 </a>
               </div>
             </div>
@@ -569,8 +574,8 @@ const Price: FC<{ title: string; price: ReactNode; source?: ReactNode }> = ({
   children,
 }) => (
   <div className="flex flex-col space-y-5">
-    <div className="flex-grow">
-      <div className="reservoir-h5 text">{title}</div>
+    <div className="flex">
+      <div className="text">{title}</div>
       <div>{source}</div>
     </div>
     <div className="flex">
@@ -637,7 +642,7 @@ const Media: FC<{
   // VIDEO
   if (extension === 'mp4') {
     return (
-      <video className="mb-4 w-full  lg:h-[1000px] md:h-[1000px]" controls autoPlay loop>
+      <video className="mb-4 w-full lg:h-[1000px] md:h-[1000px]" controls autoPlay loop>
         <source src={animation_url} type="video/mp4" />
         Your browser does not support the
         <code>video</code> element.
@@ -661,7 +666,7 @@ const Media: FC<{
   // 3D
    if (extension === 'gltf' || extension === 'glb') {
      return (
-       <div className="mb-4 w-full ">
+       <div className="mb-4 w-full">
          <model-viewer
          className="w-full"
            src={animation_url}

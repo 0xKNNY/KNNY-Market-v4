@@ -169,7 +169,7 @@ const BuyNow: FC<Props> = ({
           {waitingTx ? (
             <CgSpinner className="h-4 w-4 animate-spin border" />
           ) : (
-            'Buy Now'
+            '> Buy Now'
           )}
         </Dialog.Trigger>
       )}

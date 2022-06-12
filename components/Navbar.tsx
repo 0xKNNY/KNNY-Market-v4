@@ -47,7 +47,7 @@ const Navbar: FC<Props> = ({ communityId, mode }) => {
         <a className="mr-4 inline-flex items-center gap-3">
           
           {title ? (
-            <span className="font-semibold">{title}</span>
+            <span className="heading ">{title}</span>
           ) : (
             <span className="font-['Obvia'] text-large">market </span>
           )}
