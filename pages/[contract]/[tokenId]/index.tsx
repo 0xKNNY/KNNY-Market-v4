@@ -88,41 +88,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
     `/api/v1/asset/${contract}/${tokenId}`,
     'https://api.opensea.io/'
   )
-
-  useEffect(() => {
-    async function getOpenSeaData(url: URL) {
-      let result: any = { animation_url: null, extension: null }
-      try {
-        const res = await fetch(url.href)
-        const json = await res.json()
-
-        const animation_url = json?.animation_url
-        // Get the last section of the URL
-        // lastPartOfUrl = '874f68834bdf5f05982d01067776acc2.wav' when input is
-        // 'https://storage.opensea.io/files/874f68834bdf5f05982d01067776acc2.wav'
-        const lastPartOfUrl = animation_url?.split('/')?.pop()
-        // Extract the file extension from `lastPartOfUrl`, example: 'wav'
-        let extension = null
-        if (lastPartOfUrl) {
-          extension = /(?:\.([^.]+))?$/.exec(lastPartOfUrl)?.[1]
-        }
-
-        result = { animation_url, extension }
-      } catch (err) {
-        console.error(err)
-      }
-
-      setTokenOpenSea(result)
-    }
-
-    getOpenSeaData(urlOpenSea)
-  }, [])
-
-  if (details.error || !chainId) {
-    console.debug({ chainId })
-    return <div>There was an error</div>
-  }
-
+  
   const token = details.data?.tokens?.[0]
   const isOwner =
     token?.token?.owner?.toLowerCase() === accountData?.address.toLowerCase()
@@ -173,6 +139,42 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
     token?.token?.kind === 'erc1155' && token?.market?.floorAsk?.maker
       ? token?.market?.floorAsk?.maker
       : token?.token?.owner
+
+  useEffect(() => {
+    async function getOpenSeaData(url: URL) {
+      let result: any = { animation_url: null, extension: null }
+      try {
+        const res = await fetch(url.href)
+        const json = await res.json()
+
+        const animation_url = json?.animation_url
+        // Get the last section of the URL
+        // lastPartOfUrl = '874f68834bdf5f05982d01067776acc2.wav' when input is
+        // 'https://storage.opensea.io/files/874f68834bdf5f05982d01067776acc2.wav'
+        const lastPartOfUrl = animation_url?.split('/')?.pop()
+        // Extract the file extension from `lastPartOfUrl`, example: 'wav'
+        let extension = null
+        if (lastPartOfUrl) {
+          extension = /(?:\.([^.]+))?$/.exec(lastPartOfUrl)?.[1]
+        }
+
+        result = { animation_url, extension }
+      } catch (err) {
+        console.error(err)
+      }
+
+      setTokenOpenSea(result)
+    }
+
+    getOpenSeaData(urlOpenSea)
+  }, [])
+
+  if (details.error || !chainId) {
+    console.debug({ chainId })
+    return <div>There was an error</div>
+  }
+
+
 
   async function refreshToken(token: string | undefined) {
     function handleError(message?: string) {
