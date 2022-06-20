@@ -2,14 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
 
-@font-face {
-  font-family: 'Obvia';
-  src: url('/fonts/obvia/obvia_medium-webfont.woff2') format('woff2'),
-    url('/fonts/obvia/obvia_bold-webfont.woff2') format('woff2');
-  font-display: swap;
-  font-weight: 400 500 700;
-}
 
 .masonry-grid {
   display: -webkit-box; /* Not needed if autoprefixing */
@@ -21,57 +15,73 @@
   
 }
 
+
 .masonry-grid_column {
   padding-left: 30px; /* gutter size */
   background-clip: padding-box;
 }
+
 model-viewer{
   width:100%;
   height:700px;
   background-color: transparent;
+  border-style: solid;
+  border-color: #373737;
+  border-width: 1px;
+  border-radius: 13px;
   }
 
-/* DARK MODE */
+
+
+
+
+
+  
+/* LIGHT MODE 
 
 .background
 {
-background: rgb(0, 0, 0);
+background: rgb(255, 250, 247);
 }
 
 .border
 {
-  border-color: #414141;
-  border-width: 1px;
+  border-color: #00000024;
+  border-width: 2px;
   border-radius: 0px;
   
 }
 
 .connect-button
 {
-  background:white;
+  background: black;
   border-radius: 100px;
   font-family: Inter;
   font-weight: 500;
+  color:seashell;
+  border-color: black;
+  border-width: 2px;
 }
 
 .connect-button-connected
 {
-  background:rgb(0, 0, 0);
   color: white;
   border-radius: 100px;
+  background-color: black;
   font-family: IBM Plex Mono;
   font-weight: 500;
+  border-color: black;
 }
 
 .text
 {
-  color:rgb(255, 255, 255);
+  color:rgb(0, 0, 0);
   font-family: Inter;
 }
 
 .heading
 {
-  color:rgb(255, 255, 255);
+  color:rgb(0, 0, 0);
   font-family: Inter;
   font-weight: 600;
 }
@@ -99,14 +109,14 @@ background: rgb(0, 0, 0);
 
 .buy-button
 {
-  color: black;
-  background:rgb(255, 255, 255);
+  color: seashell;
+  background:rgb(0, 0, 0);
   border-radius: 0;
 }
 
 .makeoffer-button
 {
-  color: rgb(255, 255, 255);
+  color: #000000;
   border-radius: 0;
 }
 
@@ -138,51 +148,127 @@ background: rgb(0, 0, 0);
       color: #2f00ff
   }
 }
-/* LIGHT MODE
+
+
+
+
+
+*/
 
 .background
 {
-background: White;
+background: rgb(11,11,11);
 }
 
 .border
 {
-  border-color: black;
-  border: (1px);
-  border-radius: 12px;
+  border-color: #373737;
+  border-width: 1px;
+  border-radius: 13px;
+  
+}
+
+.connect-button
+{
+  background: white;
+  border-radius: 100px;
+  font-family: Inter;
+  font-weight: 500;
+}
+
+.connect-button-connected
+{
+  background: transparent;
+  color: white;
+  border-radius: 100px;
+  font-family: Inter;
+  border-color: #373737;
+  font-weight: 500;
 }
 
 .text
 {
-  color: black;
+  color:rgb(255, 255, 255);
+  font-family: Inter;
 }
 
 .text-large
 {
   font-size: 16pt;
-} */
-
-
-/* test mode 
-.background
-{
-background: rgb(0, 0, 0);
 }
 
-.border
+.heading
 {
-  border-color: rgb(106, 255, 0);
-  border: (2px);
-  border-radius: 0px;
+  color: seashell;
+  font-family: Inter;
+  font-weight: 600;
 }
 
-.text
-{
-  color:rgb(106, 255, 0);
-  font-family: IBM Plex Mono;
+.background-hover {
+
+  background: rgb(255, 255, 255);
 }
 
-.text-large
+.center {
+  align-content: center;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.buy-button
 {
-  font-size: 20pt;
-} */
+  color: black;
+  background:rgb(255, 255, 255);
+}
+
+.makeoffer-button
+{
+  color: rgb(255, 255, 255);
+}
+
+.rainbow-text {
+  -webkit-animation: text-color 20s infinite;
+  animation: text-color 1s infinite;
+  -webkit-animation-direction: alternate;
+  animation-direction: alternate;
+
+}
+
+.scrollable-element::-webkit-scrollbar {
+  color: transparent;
+}
+
+@keyframes text-color {
+  0% {
+      color: #ff0000
+  }
+
+  40% {
+      color: #fff200
+  }
+
+  80% {
+     color: #00ff95
+  }
+  100% {
+      color: #2f00ff
+  }
+}
+
+.margin {
+
+  margin: .5em;
+}
+
+.margin-left {
+  margin-left: auto;
+}
+
+.margin-right {
+  margin-right: auto;
+}
+
+.column {
+  max-width: 50%;
+}

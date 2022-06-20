@@ -4,6 +4,7 @@ import Link from 'next/link'
 import SearchCollections from './SearchCollections'
 import { useRouter } from 'next/router'
 
+
 type Props = {
   communityId?: string
   mode: 'global' | 'community' | 'collection'
@@ -13,7 +14,9 @@ const title = process.env.NEXT_PUBLIC_NAVBAR_TITLE
 const envLogo = process.env.NEXT_PUBLIC_NAVBAR_LOGO
 const EXTERNAL_LINKS = process.env.NEXT_PUBLIC_EXTERNAL_LINKS || null
 
-const Navbar: FC<Props> = ({ communityId, mode }) => {
+
+
+const Navbar: FC<Props> = ({ communityId, mode}) => {
   const router = useRouter()
 
   const logo = envLogo || '/reservoir.svg'
@@ -33,6 +36,8 @@ const Navbar: FC<Props> = ({ communityId, mode }) => {
     })
   }
 
+
+
   const hasExternalLinks = externalLinks.length > 0
 
   const rule1 = mode === 'global' && router.pathname !== '/'
@@ -41,6 +46,8 @@ const Navbar: FC<Props> = ({ communityId, mode }) => {
 
   const displaySearch = rule1 || rule2
 
+
+  
   return (
     <nav className="col-span-full flex gap-2 py-3 sm:py-4 text">
       <Link href="/">
@@ -74,6 +81,8 @@ const Navbar: FC<Props> = ({ communityId, mode }) => {
           </div>
         )}
       </div>
+
+
       <ConnectWallet />
     </nav>
   )

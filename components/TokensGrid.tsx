@@ -90,7 +90,7 @@ const TokensGrid: FC<Props> = ({
                   </div>
                 )}
                 
-
+              <div>
                 <p
                   className="reservoir-h6 mb-3 overflow-hidden truncate px-6 pt-4 heading background lg:pt-3"
                   title={token?.name || token?.tokenId}
@@ -115,20 +115,21 @@ const TokensGrid: FC<Props> = ({
                   <div className="text-right"></div>
                     <div className="reservoir-subtitle text-left text">
                     <div className="reservoir-subtitle text">
-                      Buy Now
+                      Price
                     </div>
                    <div className="flex">
-                    <div className="reservoir-h6 text-large text">
+                    <div className="reservoir-h6 text">
                       <FormatEth
                         amount={token?.floorAskPrice}
                         maximumFractionDigits={4}
                         logoWidth={7}
                       />
                     </div> 
-                    <div className="text-large">  ETH</div>
+                    <div className="reservoir-h6 text">  ETH</div>
                     </div>
 
                   </div>
+                </div>
                 </div>
               </a> 
             </Link>

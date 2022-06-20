@@ -228,17 +228,19 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
 
   return (
     <Layout navbar={{ mode, communityId }}>
+      
       <Head>
         {title}
         {description}
         {image}  
-        
+                
       </Head>
       <Script type='module'
           src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"/>
 
         <Script type='module'
           src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"/>
+
         
         
         
@@ -278,7 +280,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
  <br></br>
 
 
-  <div className="grid grid-cols-2 gap-4  text">
+  <div className="grid grid-cols-2 gap-4 border p-3.5 text">
     <Price
       title="Buy Now"
       source={
@@ -461,7 +463,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
                 rel="noopener noreferrer"
                 href={`https://looksrare.org/collections/${token?.token?.contract}/${token?.token?.tokenId}`}
               >
-               View on LooksRare
+               View on LooksRare 💎
               </a>
               </div>
               </div>
@@ -478,7 +480,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
                 rel="noopener noreferrer"
                 href={`https://opensea.io/assets/${token?.token?.contract}/${token?.token?.tokenId}`}
               >
-              View on OpenSea
+              View on OpenSea 🌊
               </a>
               </div>
               </div>
@@ -494,7 +496,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
                       <a className="reservoir-h6 flex items-center gap-2 text"
                           target="_blank"
                         rel="noopener noreferrer">
-                        Message owner
+                        Message owner 💬
                       </a>
                     </Link>
                   )}
@@ -514,7 +516,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
                   rel="noopener noreferrer"
                   href={`https://etherscan.io/address/${token?.token?.contract}`}
                 >
-                  View on Etherscan
+                  View on Etherscan 🔥
                 </a>
               </div>
             </div>
