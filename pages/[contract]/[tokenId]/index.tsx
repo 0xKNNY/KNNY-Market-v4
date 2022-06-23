@@ -280,7 +280,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
  <br></br>
 
 
-  <div className="grid grid-cols-2 gap-4 border p-3.5 text">
+  <div className="grid grid-cols-2 gap-4 text">
     <Price
       title="Buy Now"
       source={
