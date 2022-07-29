@@ -36,11 +36,11 @@ const TokensGrid: FC<Props> = ({
   return (
     <Masonry
       breakpointCols={{
-        default: 4,
-        1280: 3,
+        default: 3,
+        1280: 2,
         1024: 2,
-        768: 2,
-        640: 2,
+        768: 1,
+        640: 1,
         500: 1,
       }}
       className="masonry-grid"
@@ -58,7 +58,7 @@ const TokensGrid: FC<Props> = ({
               <a className="group mb-6 grid border background text self-start overflow-hidden transition">
                 {token?.image ? (
                   <img
-                    src={optimizeImage(token?.image, 250)}
+                    src={optimizeImage(token?.image, 400)}
                     alt={`${token?.name}`}
                     className="w-full"
                     width="250"

@@ -9,7 +9,7 @@ type Props = {
   setSize: any
 }
 
-type Options = 'Lowest Price' | 'Highest Offer'
+type Options = 'Highest Offer' | 'Lowest Price'
 
 const options: { [x: string]: Options } = {
   lowest_price: 'Lowest Price',
@@ -19,7 +19,7 @@ const options: { [x: string]: Options } = {
 const SortMenu: FC<Props> = ({ setSize }) => {
   const router = useRouter()
   const [open, setOpen] = useState(false)
-  const [sortSelection, setSortSelection] = useState<Options>('Lowest Price')
+  const [sortSelection, setSortSelection] = useState<Options>('Highest Offer')
 
   useEffect(() => {
     const sort = router?.query['sort']?.toString()
@@ -27,7 +27,7 @@ const SortMenu: FC<Props> = ({ setSize }) => {
       setSortSelection(options[sort])
       return
     }
-    setSortSelection('Lowest Price')
+    setSortSelection('Highest Offer')
   }, [router.query])
 
   return (
@@ -51,7 +51,7 @@ const SortMenu: FC<Props> = ({ setSize }) => {
             key={key}
             onClick={() => {
               setSize(0)
-              if (key === 'lowest_price') {
+              if (key === 'highest_offer') {
                 toggleOffItem(router, 'sort')
               } else {
                 toggleOnItem(router, 'sort', key)

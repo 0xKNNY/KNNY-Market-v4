@@ -74,10 +74,10 @@ const getKey: (
   // Convert the client sort query into the API sort query
   if (router.query?.sort) {
     if (`${router.query?.sort}` === 'highest_offer') {
-      query.sortBy = 'topBidValue'
+      query.sortBy = 'floorAskPrice'
     }
   } else {
-    query.sortBy = 'floorAskPrice'
+    query.sortBy = 'topBidValue'
   }
 
   // Extract all queries of attribute type

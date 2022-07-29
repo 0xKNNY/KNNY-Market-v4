@@ -252,12 +252,12 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
           {tokenOpenSea?.extension === null ? (
           <img
             className="mb-1 center w-fit md:h-[1000px] lg:h-[1000px]"
-            src={optimizeImage(token?.token?.image, 533)}
+            src={optimizeImage(token?.token?.image, 3000)}
           />
         ) : (
           <Media
             tokenOpenSea={tokenOpenSea}
-            tokenImage={optimizeImage(token?.token?.image, 533)}
+            tokenImage={optimizeImage(token?.token?.image, 3000)}
           />
         )}
         </article></div>
@@ -695,8 +695,8 @@ const Media: FC<{
       <div className="w-full">
         <iframe
         className="mb-4 w-full"
-        height="533"
-        width="533"
+        height="3000"
+        width="3000"
         src={animation_url}
       ></iframe> 
       </div>
