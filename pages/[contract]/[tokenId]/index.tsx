@@ -40,6 +40,9 @@ import { safeTruncate } from '@datadog/browser-core'
 // refer to the README.md file on this repository
 // Reference: https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser
 // REQUIRED
+
+
+
 const chainId = process.env.NEXT_PUBLIC_CHAIN_ID
 const RESERVOIR_API_BASE = process.env.NEXT_PUBLIC_RESERVOIR_API_BASE
 const RESERVOIR_API_KEY = process.env.RESERVOIR_API_KEY
@@ -67,6 +70,36 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
     animation_url: null,
     extension: null,
   })
+
+  useEffect(() => {
+    async function getOpenSeaData(url: URL) {
+      let result: any = { animation_url: null, extension: null }
+      try {
+        const res = await fetch(url.href)
+        const json = await res.json()
+
+        const animation_url = json?.animation_url
+        // Get the last section of the URL
+        // lastPartOfUrl = '874f68834bdf5f05982d01067776acc2.wav' when input is
+        // 'https://storage.opensea.io/files/874f68834bdf5f05982d01067776acc2.wav'
+        const lastPartOfUrl = animation_url?.split('/')?.pop()
+        // Extract the file extension from `lastPartOfUrl`, example: 'wav'
+        let extension = null
+        if (lastPartOfUrl) {
+          extension = /(?:\.([^.]+))?$/.exec(lastPartOfUrl)?.[1]
+        }
+
+        result = { animation_url, extension }
+      } catch (err) {
+        console.error(err)
+      }
+
+      setTokenOpenSea(result)
+    }
+
+    getOpenSeaData(urlOpenSea)
+  }, [])
+  
   const collection = useCollection(undefined, collectionId)
   const [refreshLoading, setRefreshLoading] = useState(false)
 
@@ -140,40 +173,12 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
       ? token?.market?.floorAsk?.maker
       : token?.token?.owner
 
-  useEffect(() => {
-    async function getOpenSeaData(url: URL) {
-      let result: any = { animation_url: null, extension: null }
-      try {
-        const res = await fetch(url.href)
-        const json = await res.json()
 
-        const animation_url = json?.animation_url
-        // Get the last section of the URL
-        // lastPartOfUrl = '874f68834bdf5f05982d01067776acc2.wav' when input is
-        // 'https://storage.opensea.io/files/874f68834bdf5f05982d01067776acc2.wav'
-        const lastPartOfUrl = animation_url?.split('/')?.pop()
-        // Extract the file extension from `lastPartOfUrl`, example: 'wav'
-        let extension = null
-        if (lastPartOfUrl) {
-          extension = /(?:\.([^.]+))?$/.exec(lastPartOfUrl)?.[1]
-        }
-
-        result = { animation_url, extension }
-      } catch (err) {
-        console.error(err)
-      }
-
-      setTokenOpenSea(result)
-    }
-
-    getOpenSeaData(urlOpenSea)
-  }, [])
 
   if (details.error || !chainId) {
     console.debug({ chainId })
     return <div>There was an error</div>
   }
-
 
 
   async function refreshToken(token: string | undefined) {
@@ -225,6 +230,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
 
     setRefreshLoading(false)
   }
+  
   
   return (
     <Layout navbar={{ mode, communityId }}>
