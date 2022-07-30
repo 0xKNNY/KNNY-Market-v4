@@ -4,6 +4,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
 
+
 .masonry-grid {
   display: -webkit-box; /* Not needed if autoprefixing */
   display: -ms-flexbox; /* Not needed if autoprefixing */
@@ -169,6 +170,12 @@ background: #121212;
   
 }
 
+.navbar {
+  top: 0;
+  position: relative;
+  width: 100%;
+}
+
 .connect-button
 {
   background: white;
@@ -244,9 +251,7 @@ background: #121212;
 
 }
 
-.scrollable-element::-webkit-scrollbar {
-  color: transparent;
-}
+
 
 @keyframes text-color {
   0% {
@@ -280,4 +285,69 @@ background: #121212;
 
 .column {
   max-width: 50%;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.navbar {
+  top: 0;
+  position: relative;
+  width: 100%;
+}
+
+.border-b {
+  border-color: #373737;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+
+.py-2 {
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+
+.px-2 {
+  padding-top: 1.25em;
+  padding-bottom: 1.25em;
+}
+
+.blink {
+  animation: 1s linear infinite condemned_blink_effect;
+}
+
+@keyframes condemned_blink_effect {
+  0% {
+    visibility: hidden;
+  }
+  50% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+
+.grey {
+  color: rgb(92, 92, 92);
+}
+
+.home-screen {
+  margin-left: auto;
+  padding-right: 1em;
+}
+.connectbutton {
+
+  background-color: white;
+  
+}
+
+
+.pointer {
+  cursor: pointer;
 }

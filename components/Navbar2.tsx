@@ -16,7 +16,7 @@ const EXTERNAL_LINKS = process.env.NEXT_PUBLIC_EXTERNAL_LINKS || null
 
 
 
-const Navbar: FC<Props> = ({ communityId, mode}) => {
+const Navbar2: FC<Props> = ({ communityId, mode}) => {
   const router = useRouter()
 
   const logo = envLogo || '/reservoir.svg'
@@ -50,24 +50,9 @@ const Navbar: FC<Props> = ({ communityId, mode}) => {
   
   return (
 <div className="col-span-full">
-<div className="flex col-span-full items-center navbar border-b py-2">
-<Link href="/">
-    <div className="px-5 flex pointer">
-        <h4 className="grey">store.knny.io</h4>
-        <h4 className="blink">_</h4>
-    </div>
-    </Link>
-  
 
-
-
-    <div className="flex home-screen"><ConnectWallet/></div>
-
-
-    
-</div>
 </div>
   )
 }
 
-export default Navbar
+export default Navbar2

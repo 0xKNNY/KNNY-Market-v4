@@ -33,7 +33,6 @@ function shrinkEns(ensName: string, shrinkInidicator?: string) {
 type Props = {
   address: string
   ens?: {
-    avatar: string | null | undefined
     name: string | null | undefined
   }
   title?: string
@@ -48,24 +47,15 @@ const EthAccount: FC<Props> = ({
   side = 'right',
   hideIcon,
 }) => {
-  const icon =
-    !hideIcon &&
-    (ens?.avatar ? (
-      <img
-        className="block h-6 w-6 rounded-full"
-        src={ens.avatar}
-        alt="ENS Avatar"
-      />
-    ) : (
-      <Jazzicon diameter={24} seed={jsNumberForAddress(address)} />
-    ))
+
+    
 
   return (
     <div className="flex items-center gap-2">
       {title && (
         <p className="reservoir-label-l capitalize text-gray-400">{title}</p>
       )}
-      {side === 'left' && icon}
+      {side === 'left'}
       {ens?.name ? (
         <div title={address}>{shrinkEns(ens.name)}</div>
       ) : (
@@ -76,7 +66,7 @@ const EthAccount: FC<Props> = ({
           {shrinkAddress(address)}
         </div>
       )}
-      {side === 'right' && icon}
+      {side === 'right'}
     </div>
   )
 }

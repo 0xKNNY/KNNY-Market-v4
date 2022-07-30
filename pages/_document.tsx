@@ -15,6 +15,11 @@ class MyDocument extends Document {
   render() {
     return (
       <Html className="scrollable-element">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com"></link>
+<link rel="preconnect" href="https://fonts.gstatic.com"></link>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet"></link>
         <Head />
         {/* Must  */}
         
