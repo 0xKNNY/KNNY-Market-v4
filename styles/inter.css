@@ -160,6 +160,8 @@ Usage:
     html { font-family: 'Inter var', sans-serif; }
   }
 */
+
+
 @font-face {
   font-family: 'Inter var';
   font-weight: 100 900;

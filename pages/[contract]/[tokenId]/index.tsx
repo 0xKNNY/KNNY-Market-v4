@@ -225,14 +225,15 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
 
     setRefreshLoading(false)
   }
-
+  
   return (
     <Layout navbar={{ mode, communityId }}>
       
       <Head>
         {title}
         {description}
-        {image}  
+        {image}
+        
                 
       </Head>
       <Script type='module'
@@ -240,18 +241,28 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
 
         <Script type='module'
           src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"/>
+        
+        
+        
+        
+        
 
-        
-        
-        
-        
-        
+
+
+{/* FIRST COLUMN STARTS HERE */}
+
+
+
+{/* SECOND COLUMN STARTS HERE*/}
+      
+<article className="col-span-full grid content-start gap-4 lg:col-span-8 lg:col-start-3">
+
         {/*TOKEN IMAGE*/}
-        <div className="col-span-full md:h-[1000px] lg:h-[1000px]">
-          <article className="md:h-[1000px] center lg:h-[1000px] w-full gap-4 grid">
+        <div className="col-span-full">
+          <article className="center  w-full gap-4 grid">
           {tokenOpenSea?.extension === null ? (
           <img
-            className="mb-1 center w-fit md:h-[1000px] lg:h-[1000px]"
+            className="mb-1 border center "
             src={optimizeImage(token?.token?.image, 3000)}
           />
         ) : (
@@ -262,25 +273,40 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
         )}
         </article></div>
 
-
-{/* FIRST COLUMN STARTS HERE */}
-
-<div className="col-span-full grid content-start gap-4 md:col-span-4 lg:col-span-6 lg:col-start-1">
-
-
-
 {/*TITLE/PRICE/BUY BOX*/}
 
-<article className="col-span-full background p-6">
-<div className="reservoir-h2 mb-0 w-fit overflow-hidden heading">
+<article className="col-span-full background p-2.5">
+<div className="reservoir-h3 mb-0 w-fit overflow-hidden heading">
     {token?.token?.name || `#${token?.token?.tokenId}`}
-  </div>
-
-<div className="text-sm flex mb-2">created by<div>  {COLLECTION}</div></div>
+</div>
+          <Link
+            href={
+              mode === 'collection'
+                ? 'https://knny.io'
+                : `/collections/${collection.data?.collection?.id}`
+            }
+          >
+            <a className="inline-flex items-center gap-2">
+              <img
+                src={optimizeImage(
+                  collection.data?.collection?.metadata?.imageUrl as string,
+                  50
+                )}
+                alt="collection avatar"
+                className="h-9 w-9 rounded-full border"
+              />
+              <span className="reservoir-h6 text">
+              created by  {COLLECTION}
+              </span>
+            </a>
+                </Link> 
+ <br></br>
+ <br></br>
  <br></br>
 
 
-  <div className="grid grid-cols-2 gap-4 text">
+
+  <div className="grid grid-cols-2 gap-4 border p-4 text">
     <Price
       title="Buy Now"
       source={
@@ -288,7 +314,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
           target="_blank"
           rel="noopener noreferrer"
           href={sourceRedirect}
-          className=" flex items-center gap-2 "
+          className=" flex items-center gap-2"
         >
           {/*on {token?.market?.floorAsk?.source?.name}
           {
@@ -403,43 +429,14 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
 </article>
 <Listings asks={asks} />
 
-</div>
-
-
-
-        {/* SECOND COLUMN STARTS HERE*/}
-      
-        <article className="col-span-full grid content-start gap-4 md:col-span-4 lg:col-span-6 lg:col-start-7">
-
          {/* DESCRIPTION */}
 
         <article className="col-span-full text background p-6">
-          <div className="reservoir-h5 mb-4 text">&gt; Description</div>
-          {/*<Link
-            href={
-              mode === 'collection'
-                ? '/'
-                : `/collections/${collection.data?.collection?.id}`
-            }
-          >
-            <a className="inline-flex items-center gap-2">
-              <img
-                src={optimizeImage(
-                  collection.data?.collection?.metadata?.imageUrl as string,
-                  50
-                )}
-                alt="collection avatar"
-                className="h-9 w-9 rounded-full border"
-              />
-              <span className="reservoir-h6 text">
-                {token?.token?.collection?.name}
-              </span>
-            </a>
-                </Link> */}
+          <div className="reservoir-h6 mb-4 text"> Description</div>
 
 
           {token?.token?.description && (
-            <div className="reservoir-body-2 mt-4 text">
+            <div className="reservoir-body-2 mt-4 text-[#929292]">
               {token?.token?.description}
             </div>
           )}
@@ -450,7 +447,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
         
         <article className="col-span-full background text p-6">
           <div className="mb-4 flex items-center justify-between">
-            <div className="reservoir-h5 text">&gt; NFT Details</div>
+            <div className="reservoir-h6 text">NFT Details</div>
           </div>
 
           {/* LOOKSRARE LINK */}
@@ -458,7 +455,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
           <div className="mb-4 flex items-center reservoir-subtitle text justify-between">
           <div>
           <a
-                className="reservoir-h6 flex items-center gap-2 text"
+                className="reservoir-subtitle flex items-center gap-2 text"
                 target="_blank"
                 rel="noopener noreferrer"
                 href={`https://looksrare.org/collections/${token?.token?.contract}/${token?.token?.tokenId}`}
@@ -475,7 +472,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
           <div className="mb-4 flex items-center reservoir-subtitle text justify-between">
           <div>
           <a
-                className="reservoir-h6 flex items-center gap-2 text"
+                className="reservoir-subtitle flex items-center gap-2 text"
                 target="_blank"
                 rel="noopener noreferrer"
                 href={`https://opensea.io/assets/${token?.token?.contract}/${token?.token?.tokenId}`}
@@ -493,7 +490,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
                 <a>
                    {owner && (
                     <Link href={`https://chat.blockscan.com/index?a=${owner}`}>
-                      <a className="reservoir-h6 flex items-center gap-2 text"
+                      <a className="reservoir-subtitle flex items-center gap-2 text"
                           target="_blank"
                         rel="noopener noreferrer">
                         Message owner 💬
@@ -511,7 +508,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
             <div className="mb-4 flex items-center justify-between">
               <div>
                 <a
-                  className="reservoir-h6 flex items-center gap-2 text"
+                  className="reservoir-subtitle flex items-center gap-2 text"
                   target="_blank"
                   rel="noopener noreferrer"
                   href={`https://etherscan.io/address/${token?.token?.contract}`}
@@ -525,21 +522,21 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
           {/* TOKEN ID */}
 
           <div className="mb-4 flex items-center justify-between">
-            <div className="reservoir-subtitle text">Token ID</div>
-            <div className="reservoir-h6 text">{token?.token?.tokenId}</div>
+            <div className="reservoir-subtitle text-[#929292]">Token ID</div>
+            <div className="reservoir-h6 text-[#929292]">{token?.token?.tokenId}</div>
           </div>
 
           {/* TOKEN STANDARD */}
 
           <div className="mb-4 flex items-center justify-between">
-            <div className="reservoir-subtitle text">Token Standard</div>
-            <div className="reservoir-h6 text uppercase">{token?.token?.kind}</div>
+            <div className="reservoir-subtitle text-[#929292]">Token Standard</div>
+            <div className="reservoir-h6 text-[#929292] uppercase">{token?.token?.kind}</div>
           </div>
 
           {/* REFRESH BUTTON */}
 
           <div className="flex items-center justify-between">
-            <div className="reservoir-subtitle text">Metadata Refresh</div>
+            <div className="reservoir-subtitle text-[#929292]">Metadata Refresh</div>
             <button
               className="border reservoir-h6 ml-auto flex items-center gap-2 p-2 text"
               title="Refresh token"
@@ -579,12 +576,12 @@ const Price: FC<{ title: string; price: ReactNode; source?: ReactNode }> = ({
 }) => (
   <div className="flex flex-col space-y-5">
     <div className="flex">
-      <div className="text">{title}</div>
+      <div className="text-[#929292]">{title}</div>
       <div>{source}</div>
     </div>
     <div className="flex">
-    <div className="reservoir-h3 text">{price}</div>
-    <div className="reservoir-h3 text">  ETH</div>
+    <div className="reservoir-h4 text">{price}</div>
+    <div className="reservoir-h4 text">  ETH</div>
     </div>
     {children}
   </div>
@@ -646,7 +643,7 @@ const Media: FC<{
   // VIDEO
   if (extension === 'mp4') {
     return (
-      <video className="mb-4 w-full lg:h-[1000px] md:h-[1000px]" controls autoPlay loop>
+      <video className="mb-4 w-full border" controls autoPlay loop>
         <source src={animation_url} type="video/mp4" />
         Your browser does not support the
         <code>video</code> element.
