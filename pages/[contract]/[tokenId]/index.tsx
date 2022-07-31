@@ -592,7 +592,6 @@ const Price: FC<{ title: string; price: ReactNode; source?: ReactNode }> = ({
     {children}
   </div>
 )
-
 export const getServerSideProps: GetServerSideProps<{
   collectionId: string
   mode: ReturnType<typeof getMode>['mode']

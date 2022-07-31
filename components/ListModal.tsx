@@ -263,7 +263,7 @@ const ListModal: FC<Props> = ({
               <button
                 disabled={waitingTx || isInTheWrongNetwork}
                 onClick={execute}
-                className="btn-primary-fill w-full"
+                className="btn-primary-fill buy-button w-full"
               >
                 {waitingTx ? (
                   <CgSpinner className="h-4 w-4 animate-spin" />
@@ -275,7 +275,7 @@ const ListModal: FC<Props> = ({
           >
             <div className="mb-8 space-y-5">
               <div className="flex items-center justify-between">
-                <label htmlFor="price" className="reservoir-h6">
+                <label htmlFor="price" className="text">
                   Price (ETH)
                 </label>
                 <input
@@ -297,7 +297,7 @@ const ListModal: FC<Props> = ({
                 />
               </div>
               <div className="flex items-center gap-3">
-                <label htmlFor="postOpenSea" className="reservoir-h6">
+                <label htmlFor="postOpenSea" className="text">
                   Post listing to OpenSea
                 </label>
                 <input
@@ -317,8 +317,8 @@ const ListModal: FC<Props> = ({
                 />
               </div>
               <div className="flex justify-between">
-                <div className="reservoir-h6">Fees</div>
-                <div className="reservoir-body text-right">
+                <div className="text">Fees</div>
+                <div className="text text-right">
                   <div>Royalty {royaltyPercentage}</div>
                   {postOnOpenSea && (
                     <div>
@@ -328,8 +328,8 @@ const ListModal: FC<Props> = ({
                 </div>
               </div>
               <div className="flex justify-between">
-                <div className="reservoir-h6">You get</div>
-                <div className="reservoir-h6">
+                <div className="text">You get</div>
+                <div className="text">
                   <FormatEth
                     amount={youGet}
                     maximumFractionDigits={4}

@@ -10,12 +10,12 @@ type Props = {
 
 const FormatEth: FC<Props> = ({ amount, maximumFractionDigits, logoWidth }) => {
   const value = formatBN(amount, maximumFractionDigits)
-  return (
+   return (
     <div className="">
-      
       <span className="flex-grow text">{value}</span>
     </div>
   )
 }
+
 
 export default FormatEth

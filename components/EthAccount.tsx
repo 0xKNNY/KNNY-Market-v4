@@ -51,7 +51,7 @@ const EthAccount: FC<Props> = ({
     
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2"> ✓
       {title && (
         <p className="reservoir-label-l capitalize text-gray-400">{title}</p>
       )}

@@ -24,21 +24,21 @@ const Steps: FC<Props> = ({ steps }) => {
             ) : firstIncomplete === index ? (
               <CgSpinner className="mr-1 ml-1 -mt-0.5 h-8 w-8 flex-none animate-spin text-black" />
             ) : (
-              <div className="reservoir-h6 mr-1 ml-1 flex h-8 w-8 items-center justify-center rounded-full text-center ring-2 ring-inset ring-neutral-900">
+              <div className="text mr-1 ml-1 flex h-8 w-8 items-center justify-center rounded-full text-center ring-2 ring-inset ring-neutral-900">
                 <div>{index + 1}</div>
               </div>
             )}
           </div>
           <div>
-            <div className="reservoir-h6 mb-1 mt-0.5">{action}</div>
+            <div className="text mb-1 mt-0.5">{action}</div>
             {error && (
-              <div className="reservoir-h6 mb-2.5 text-red-800">{error}</div>
+              <div className="text mb-2.5 text-red-800">{error}</div>
             )}
             {firstIncomplete === index && (
               <>
-                <div className="reservoir-body mb-2.5">{description}</div>
+                <div className="text mb-2.5">{description}</div>
                 {message && (
-                  <div className="reservoir-body italic">{message}</div>
+                  <div className="text italic">{message}</div>
                 )}
               </>
             )}

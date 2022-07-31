@@ -50,18 +50,25 @@ const Navbar: FC<Props> = ({ communityId, mode}) => {
   
   return (
 <div className="col-span-full">
-<div className="flex col-span-full items-center navbar border-b py-2">
-<Link href="/">
-    <div className="px-5 flex pointer">
-        <h4 className="grey">store.knny.io</h4>
-        <h4 className="blink">_</h4>
-    </div>
+
+<div>
+    <Link href="/">
+      <nav className="flex items-center py-2">
+        <div className="px-5 flex">
+            <h4 className="transparent">.</h4>
+        </div>    
+    </nav>
     </Link>
-  
+</div>
 
-
-
-    <div className="flex home-screen"><ConnectWallet/></div>
+<div className="flex col-span-full items-center navbar border-b py-2">
+  <Link href="/">
+    <div className="px-5 flex pointer">
+      <h4 className="grey">store.knny.io</h4>
+      <h4 className="blink">_</h4>
+    </div>
+  </Link>
+<div className="flex home-screen"><ConnectWallet/></div>
 
 
     

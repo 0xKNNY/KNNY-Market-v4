@@ -97,38 +97,49 @@ const TokensGrid: FC<Props> = ({
                 >
                   {token?.name || `#${token?.tokenId}`}
                 </p>
-                <div className="flex items-center px-6 pb-4 lg:pb-3">
-                  {/*<div>
-                    <div className="reservoir-subtitle text">
-                      Offer
-                    </div>
-                    <div className="reservoir-h6 text">
-                      <FormatEth
-                        amount={token?.topBidValue}
-                        maximumFractionDigits={4}
-                        logoWidth={7}
-                      />
-                    </div>
-                  </div>*/}
+                <div className="flex justify-between items-center px-6 pb-4 lg:pb-3">
+
+
 
                   
-                  <div className="text-right"></div>
+                  <div className="text-left">
                     <div className="reservoir-subtitle text-left text">
                     <div className="reservoir-subtitle text">
                       Price
                     </div>
                    <div className="flex">
-                    <div className="reservoir-h6 text">
+                    <div className="reservoir-subtitle text">
                       <FormatEth
                         amount={token?.floorAskPrice}
                         maximumFractionDigits={4}
                         logoWidth={7}
                       />
                     </div> 
-                    <div className="reservoir-h6 text">  ETH</div>
+                    <div className="reservoir-subtitle text">  ETH</div>
                     </div>
-
                   </div>
+                  </div>
+
+
+
+
+                  <div className="">
+                    <div className="reservoir-subtitle text-right text">
+                      Offer
+                    </div>
+                    <div className="reservoir-subtitle text-right flex text">
+                      <FormatEth
+                        amount={token?.topBidValue}
+                        maximumFractionDigits={4}
+                        logoWidth={7}
+                      />
+                      <div className="reservoir-subtitle text">  ETH</div>
+                      
+                    </div>
+                  </div>
+
+
+
                 </div>
                 </div>
               </a> 

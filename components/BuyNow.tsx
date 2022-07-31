@@ -151,26 +151,19 @@ const BuyNow: FC<Props> = ({
   }
 
   const tokenString = `${token?.token?.contract}:${token?.token?.tokenId}`
-
+  const Listed = '> Buy Now'
   const taker = accountData?.address
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       {show && (
         <Dialog.Trigger
-          disabled={
-            token?.market?.floorAsk?.price === null ||
-            waitingTx ||
-            isInTheWrongNetwork
-          }
+          disabled={( token?.market?.floorAsk?.price === null || waitingTx || isInTheWrongNetwork)}
           onClick={() => taker && tokenString && execute(tokenString, taker)}
           className="btn-primary-outline w-full buy-button border"
+          
         >
-          {waitingTx ? (
-            <CgSpinner className="h-4 w-4 animate-spin border" />
-          ) : (
-            '> Buy Now'
-          )}
+          {waitingTx ? (<CgSpinner className="h-4 w-4 animate-spin border" />) : (Listed)}
         </Dialog.Trigger>
       )}
       {steps && (

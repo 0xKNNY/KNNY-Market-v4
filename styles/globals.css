@@ -172,9 +172,11 @@ background: #121212;
 
 .navbar {
   top: 0;
-  position: relative;
+  position: fixed;
   width: 100%;
+  background: #121212;
 }
+
 
 .connect-button
 {
@@ -228,9 +230,14 @@ background: #121212;
 .buy-button
 {
   color: black;
-  background: #9cc069;
+  background: #2DE370;
   border-width: 0px;
   border-radius: 11px;
+}
+
+.buy-button :hover
+{
+  background: #ffffff;
 }
 
 .makeoffer-button
@@ -295,12 +302,6 @@ background: #121212;
   align-items: center;
 }
 
-.navbar {
-  top: 0;
-  position: relative;
-  width: 100%;
-}
-
 .border-b {
   border-color: #373737;
   border-bottom-width: 1px;
@@ -312,9 +313,19 @@ background: #121212;
   padding-bottom: .5em;
 }
 
+.marginy-2 {
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+
 .px-2 {
-  padding-top: 1.25em;
-  padding-bottom: 1.25em;
+  padding-left: 1.25em;
+  padding-right: 1.25em;
+}
+
+.marginx-2 {
+  margin-left: 1.25em;
+  margin-right: 1.25em;
 }
 
 .blink {
@@ -343,11 +354,30 @@ background: #121212;
 }
 .connectbutton {
 
-  background-color: white;
+  background-color: transparent;
   
 }
 
 
 .pointer {
   cursor: pointer;
+}
+
+.transparent {
+  color:transparent;
+}
+
+.svg {
+  width: 16px;
+}
+
+.text-right {
+  text-align: right;
+  align-self: right;
+  align-items: right;
+
+}
+
+.green {
+  color:#2DE370;
 }

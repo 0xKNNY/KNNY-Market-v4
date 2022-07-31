@@ -16,14 +16,14 @@ const ConnectWallet: FC = () => {
   if (accountData) {
     return (
       <DropdownMenu.Root>
-        <DropdownMenu.Trigger className="">
+        <DropdownMenu.Trigger className="green">
           {loading ? (
-            <div className="background h-[32px] w-[115px] animate-pulse border text"></div>
+            <div className="animate-pulse text">loading</div>
           ) : (
             <EthAccount
               address={accountData.address}
               ens={{
-                name: accountData.ens?.name,
+              name: accountData.ens?.name,
               }}
             />
           )}
@@ -66,9 +66,9 @@ const ConnectWallet: FC = () => {
     <button
       key={wallet.id}
       onClick={() => connect(wallet)}
-      className="grey"
+      className="grey connectbutton"
     >
-      Connect Wallet
+      [ Connect Wallet ]
     </button>
   )
 }
