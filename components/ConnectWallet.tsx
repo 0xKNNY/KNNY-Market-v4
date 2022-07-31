@@ -36,13 +36,13 @@ const ConnectWallet: FC = () => {
         >
           <div className="group flex w-full items-center justify-between px-4 py-3 outline-none transition">
             <span>Balance </span>
-            <span>
-              {accountData.address && <Balance address={accountData.address} />}
+            <span className="green">
+              <Balance address={accountData.address}/>
             </span>
           </div>
           <Link href={`/address/${accountData.address}`}>
             <DropdownMenu.Item asChild>
-              <a className="group flex w-full cursor-pointer items-center justify-between px-4 py-3 outline-none transition hover:bg-neutral-100 focus:bg-neutral-100">
+              <a className="group flex w-full cursor-pointer items-center justify-between px-4 py-3 rounded outline-none transition hover:bg-[#2DE370] hover:bg-[#252525] hover:text-[#909090]">
                 Portfolio
               </a>
             </DropdownMenu.Item>
@@ -51,7 +51,7 @@ const ConnectWallet: FC = () => {
             <button
               key={wallet.id}
               onClick={() => disconnect()}
-              className="group flex w-full cursor-pointer items-center justify-between gap-3 rounded px-4 py-3 outline-none transition hover:bg-neutral-100 focus:bg-neutral-100"
+              className="group flex w-full cursor-pointer items-center justify-between gap-3 rounded px-4 py-3 disconnect-button outline-none hover:bg-[transparent] hover:bg-[#b93624]"
             >
               <span>Disconnect</span>
               <HiOutlineLogout className="h-6 w-7" />

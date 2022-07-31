@@ -381,3 +381,10 @@ background: #121212;
 .green {
   color:#2DE370;
 }
+
+.disconnect-button {
+  background-color:#e3422d;
+  border-radius: 5px;
+
+
+}
