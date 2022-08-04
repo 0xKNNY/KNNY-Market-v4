@@ -159,14 +159,14 @@ background: rgb(255, 250, 247);
 
 .background
 {
-background: #121212;
+background: #090c0b;
 }
 
 .border
 {
   border-color: #373737;
   border-width: 1px;
-  border-radius: 13px;
+  border-radius: 6px;
   
 }
 
@@ -174,7 +174,7 @@ background: #121212;
   top: 0;
   position: fixed;
   width: 100%;
-  background: #121212;
+  background: #090c0b
 }
 
 
@@ -210,7 +210,7 @@ background: #121212;
 
 .heading
 {
-  color: seashell;
+  color: white;
   font-family: 'IBM Plex Mono', Inter;
   font-weight: 600;
 }
@@ -230,9 +230,9 @@ background: #121212;
 .buy-button
 {
   color: black;
-  background: #2DE370;
+  background: #44f1a6;
   border-width: 0px;
-  border-radius: 11px;
+  border-radius: 6px;
 }
 
 .buy-button :hover
@@ -245,7 +245,7 @@ background: #121212;
   color: rgb(255, 255, 255);
   background-color: #252525;
   border-color: transparent;
-  border-radius: 11px;
+  border-radius: 6px;
 
 }
 
@@ -379,12 +379,12 @@ background: #121212;
 }
 
 .green {
-  color:#2DE370;
+  color:#44f1a6;
 }
 
 .disconnect-button {
   background-color:#e3422d;
-  border-radius: 5px;
+  border-radius: 6px;
 
 
 }
