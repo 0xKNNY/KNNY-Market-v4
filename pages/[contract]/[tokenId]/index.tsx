@@ -1,4 +1,5 @@
 import Layout from 'components/Layout'
+import { paths } from 'interfaces/apiTypes'
 import { optimizeImage } from 'lib/optmizeImage'
 import setParams from 'lib/params'
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next'
@@ -13,7 +14,7 @@ import CancelListing from 'components/CancelListing'
 import CancelOffer from 'components/CancelOffer'
 import AcceptOffer from 'components/AcceptOffer'
 import BuyNow from 'components/BuyNow'
-import EthAccount, { shrinkAddress } from 'components/EthAccount'
+import EthAccount from 'components/EthAccount'
 import Link from 'next/link'
 import useDataDog from 'hooks/useAnalytics'
 import Head from 'next/head'
@@ -22,45 +23,23 @@ import toast from 'react-hot-toast'
 import Toast from 'components/Toast'
 import useDetails from 'hooks/useDetails'
 import useCollection from 'hooks/useCollection'
-import { paths } from '@reservoir0x/client-sdk'
-import {
-  FiAlignCenter,
-  FiDatabase,
-  FiExternalLink,
-  FiRefreshCcw,
-  FiUsers,
-} from 'react-icons/fi'
-import useAsks from 'hooks/useAsks'
-import Listings from 'components/token/Listings'
-import Script from 'next/script'
-import { safeTruncate } from '@datadog/browser-core'
 
 // Environment variables
 // For more information about these variables
 // refer to the README.md file on this repository
 // Reference: https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser
 // REQUIRED
-
-
-
+const apiBase = process.env.NEXT_PUBLIC_API_BASE
 const chainId = process.env.NEXT_PUBLIC_CHAIN_ID
-const RESERVOIR_API_BASE = process.env.NEXT_PUBLIC_RESERVOIR_API_BASE
-const RESERVOIR_API_KEY = process.env.RESERVOIR_API_KEY
-const PROXY_API_BASE = process.env.NEXT_PUBLIC_PROXY_API_BASE
 
 // OPTIONAL
-const COLLECTION = process.env.NEXT_PUBLIC_COLLECTION
-const COMMUNITY = process.env.NEXT_PUBLIC_COMMUNITY
+const collectionEnv = process.env.NEXT_PUBLIC_COLLECTION
+const communityEnv = process.env.NEXT_PUBLIC_COMMUNITY
 const openSeaApiKey = process.env.NEXT_PUBLIC_OPENSEA_API_KEY
-
-const META_TITLE = process.env.NEXT_PUBLIC_META_TITLE
-const META_DESCRIPTION = process.env.NEXT_PUBLIC_META_DESCRIPTION
-const META_OG_IMAGE = process.env.NEXT_PUBLIC_META_OG_IMAGE
-const USE_WILDCARD = process.env.NEXT_PUBLIC_USE_WILDCARD
 
 type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
-const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
+const Index: NextPage<Props> = ({ collectionId, mode }) => {
   const [{ data: accountData }] = useAccount()
   const [{ data: signer }] = useSigner()
   const [{ data: network }] = useNetwork()
@@ -70,6 +49,14 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
     animation_url: null,
     extension: null,
   })
+
+  const contract = router.query?.contract?.toString()
+  const tokenId = router.query?.tokenId?.toString()
+
+  const urlOpenSea = new URL(
+    `/api/v1/asset/${contract}/${tokenId}`,
+    'https://api.opensea.io/'
+  )
 
   useEffect(() => {
     async function getOpenSeaData(url: URL) {
@@ -99,531 +86,267 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
 
     getOpenSeaData(urlOpenSea)
   }, [])
-  
-  const collection = useCollection(undefined, collectionId)
-  const [refreshLoading, setRefreshLoading] = useState(false)
 
-  const details = useDetails({
-    tokens: [
-      `${router.query?.contract?.toString()}:${router.query?.tokenId?.toString()}`,
-    ],
+  const details = useDetails(apiBase, {
+    contract,
+    tokenId,
   })
-  const asks = useAsks(
-    undefined,
-    details.data?.tokens?.[0]?.token?.kind,
-    `${details.data?.tokens?.[0]?.token?.contract}:${details.data?.tokens?.[0]?.token?.tokenId}`
-  )
-  
-  const contract = router.query?.contract?.toString()
-  const tokenId = router.query?.tokenId?.toString()
+  const collection = useCollection(apiBase, undefined, collectionId)
 
-  const urlOpenSea = new URL(
-    `/api/v1/asset/${contract}/${tokenId}`,
-    'https://api.opensea.io/'
-  )
+  if (details.error || !apiBase || !chainId) {
+    console.debug({ apiBase, chainId })
+    return <div>There was an error</div>
+  }
 
   const token = details.data?.tokens?.[0]
   const isOwner =
     token?.token?.owner?.toLowerCase() === accountData?.address.toLowerCase()
   const isTopBidder =
     !!accountData &&
-    token?.market?.topBid?.maker?.toLowerCase() ===
-      accountData?.address?.toLowerCase()
-  const isListed = token?.market?.floorAsk?.price !== null
+    token?.market?.topBuy?.maker?.toLowerCase() ===
+    accountData?.address?.toLowerCase()
+  const isListed = token?.market?.floorSell?.value !== null
   const isInTheWrongNetwork = signer && network.chain?.id !== +chainId
-
-  const sourceLogo = `https://api.reservoir.tools/redirect/logo/v1?source=${token?.market?.floorAsk?.source?.name}`
-
-  const sourceRedirect = `https://api.reservoir.tools/redirect/token/v1?source=${token?.market?.floorAsk?.source?.name}&token=${token?.token?.contract}:${token?.token?.tokenId}`
 
   const setToast: (data: ComponentProps<typeof Toast>['data']) => any = (
     data
   ) => toast.custom((t) => <Toast t={t} toast={toast} data={data} />)
 
-  const title = META_TITLE ? (
-    <title>{META_TITLE}</title>
-  ) : (
-    <title>
-      {token?.token?.name || `#${token?.token?.tokenId}`} -{' '}
-      {collection.data?.collection?.name} 
-    </title>
-  )
-  const description = META_DESCRIPTION ? (
-    <meta name="description" content={META_DESCRIPTION} />
-  ) : (
-    <meta
-      name="description"
-      content={collection.data?.collection?.metadata?.description as string}
-    />
-  )
-  const image = META_OG_IMAGE ? (
-    <>
-      <meta name="twitter:image" content={META_OG_IMAGE} />
-      <meta name="og:image" content={META_OG_IMAGE} />
-    </>
-  ) : (
-    <>
-      <meta name="twitter:image" content={token?.token?.image} />
-      <meta property="og:image" content={token?.token?.image} />
-    </>
-  )
-
-  const owner =
-    token?.token?.kind === 'erc1155' && token?.market?.floorAsk?.maker
-      ? token?.market?.floorAsk?.maker
-      : token?.token?.owner
-
-
-
-  if (details.error || !chainId) {
-    console.debug({ chainId })
-    return <div>There was an error</div>
-  }
-
-
-  async function refreshToken(token: string | undefined) {
-    function handleError(message?: string) {
-      setToast({
-        kind: 'error',
-        message: message || 'Request to refresh collection was rejected.',
-        title: 'Refresh collection failed',
-      })
-
-      setRefreshLoading(false)
-    }
-
-    try {
-      if (!token) throw new Error('No token')
-
-      const data = {
-        token,
-      }
-
-      const pathname = `${PROXY_API_BASE}/tokens/refresh/v1`
-
-      setRefreshLoading(true)
-
-      const res = await fetch(pathname, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-
-      if (!res.ok) {
-        const json = await res.json()
-        handleError(json?.message)
-        return
-      }
-
-      setToast({
-        kind: 'success',
-        message: 'Request to refresh collection was accepted.',
-        title: 'Refresh collection',
-      })
-    } catch (err) {
-      handleError()
-      console.error(err)
-      return
-    }
-
-    setRefreshLoading(false)
-  }
-  
-  
   return (
-    <Layout navbar={{ mode, communityId }}>
-      
+    <Layout>
       <Head>
-        {title}
-        {description}
-        {image}
-        
-                
+        <title>
+          KNNYs Market :)
+        </title>
+        <meta
+          name="description"
+          content={collection.data?.collection?.collection?.description}
+        />
+        <meta name="twitter:image" content={token?.token?.image} />
+        <meta property="og:image" content={token?.token?.image} />
+        <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+        <script
+          noModule
+          src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"
+        ></script>
       </Head>
-      <Script type='module'
-          src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"/>
-
-        <Script type='module'
-          src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"/>
-        
-        
-        
-        
-        
-
-
-
-{/* FIRST COLUMN STARTS HERE */}
-
+      <div className="mb-2 mt-9 grid grid-cols-1 place-items-center gap-6 sm:mb-12 sm:grid-cols-2">
+        {/* <Link href={`/collections/${collectionId}`}>
+          <a className="reservoir-capitalized mt-9 flex items-center justify-self-start sm:col-span-2">
+            <FiArrowLeft /> Back
+          </a>
+        </Link> */}
+        <div className="ml-auto self-start">
+          {/* TOKEN IMAGE */}
+          {/* <img
+            className="mb-4 w-[533px] rounded-2xl"
+            src={optimizeImage(token?.token?.image, 533)}
+          /> */}
+          
 
 
-{/* SECOND COLUMN STARTS HERE*/}
-      
-<article className="col-span-full grid content-start gap-4 lg:col-span-8 lg:col-start-3">
 
-        {/*TOKEN IMAGE*/}
-        <div className="col-span-full">
-          <article className="center  w-full gap-4 grid">
+          
+
+
+
+
           {tokenOpenSea?.extension === null ? (
-          <img
-            className="mb-1 border center "
-            src={optimizeImage(token?.token?.image, 3000)}
-          />
-        ) : (
-          <Media
-            tokenOpenSea={tokenOpenSea}
-            tokenImage={optimizeImage(token?.token?.image, 3000)}
-          />
-        )}
-        </article></div>
-
-{/*TITLE/PRICE/BUY BOX*/}
-
-<article className="col-span-full background p-2.5">
-<div className="reservoir-h3 mb-0 w-fit overflow-hidden heading">
-    {token?.token?.name || `#${token?.token?.tokenId}`}
-</div>
-          <Link
-            href={
-              mode === 'collection'
-                ? 'https://knny.io'
-                : `/collections/${collection.data?.collection?.id}`
-            }
-          >
-            <a className="inline-flex items-center gap-2">
-              <img
-                src={optimizeImage(
-                  collection.data?.collection?.metadata?.imageUrl as string,
-                  50
-                )}
-                alt="collection avatar"
-                className="h-9 w-9 rounded-full border"
-              />
-              <span className="reservoir-h6 text">
-              created by  {COLLECTION}
-              </span>
-            </a>
-                </Link> 
- <br></br>
- <br></br>
- <br></br>
-
-
-
-  <div className="grid grid-cols-2 gap-4 border p-4 text">
-    <Price
-      title="Buy Now"
-      source={
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href={sourceRedirect}
-          className=" flex items-center gap-2"
-        >
-          {/*on {token?.market?.floorAsk?.source?.name}
-          {
             <img
-              className="h-6 w-6"
-              src={sourceLogo}
-              alt="Source Logo"
-            /> 
-          } */}
-        </a>
-      }
-      price={ 
-        <FormatEth
-          amount={(token?.market?.floorAsk?.price)}
-          maximumFractionDigits={4}
-          logoWidth={16}
-        />
-      }
-    >
-      {isOwner && (
-        <ListModal
-          data={{
-            collection: collection.data,
-            details,
-          }}
-          isInTheWrongNetwork={isInTheWrongNetwork}
-          maker={accountData?.address}
-          setToast={setToast}
-          signer={signer}
-        />
-      )}
-      <BuyNow
-        data={{
-          collection: collection.data,
-          details,
-        }}
-        signer={signer}
-        isInTheWrongNetwork={isInTheWrongNetwork}
-        setToast={setToast}
-        show={!isOwner}
-      />
-    </Price>
-    <Price
-      title="Offer"
-      price={
-        <FormatEth
-          amount={token?.market?.topBid?.value}
-          maximumFractionDigits={4}
-          logoWidth={16}
-        />
-      }
-    >
-      <AcceptOffer
-        data={{
-          collection: collection.data,
-          details,
-        }}
-        isInTheWrongNetwork={isInTheWrongNetwork}
-        setToast={setToast}
-        show={isOwner}
-        signer={signer}
-      />
-      {!isOwner && (
-        <TokenOfferModal
-          signer={signer}
-          data={{
-            collection: collection.data,
-            details,
-          }}
-          royalties={{
-            bps: collection.data?.collection?.royalties?.bps,
-            recipient:
-              collection.data?.collection?.royalties?.recipient,
-          }}
-          env={{
-            chainId: +chainId as ChainId,
-            openSeaApiKey,
-          }}
-          setToast={setToast}
-        />
-      )}
-    </Price>
-  </div>
-  <div
-    className={`${
-      (isOwner && isListed) || isTopBidder ? 'mt-6' : ''
-    } flex justify-center`}
-  >
-    <CancelOffer
-      data={{
-        collection: collection.data,
-        details,
-      }}
-      maker={accountData?.address.toLowerCase()}
-      signer={signer}
-      show={isTopBidder}
-      isInTheWrongNetwork={isInTheWrongNetwork}
-      setToast={setToast}
-    />
-    <CancelListing
-      data={{
-        collection: collection.data,
-        details,
-      }}
-      maker={accountData?.address.toLowerCase()}
-      signer={signer}
-      show={isOwner && isListed}
-      isInTheWrongNetwork={isInTheWrongNetwork}
-      setToast={setToast}
-    />
-  </div>
-</article>
-<Listings asks={asks} />
-
-         {/* DESCRIPTION */}
-
-        <article className="col-span-full text background p-6">
-          <div className="reservoir-h6 mb-4 text"> Description</div>
-
-
-          {token?.token?.description && (
-            <div className="reservoir-body-2 mt-4 text-[#929292]">
-              {token?.token?.description}
-            </div>
+              className="mb-4 w-[700px] rounded-[10px]"
+              src={optimizeImage(token?.token?.image, 700)}
+            />
+          ) : (
+            <Media
+              tokenOpenSea={tokenOpenSea}
+              tokenImage={optimizeImage(token?.token?.image, 700)}
+            />
           )}
-        </article>
-
-
-        {/* NFT DETAILS */}
-        
-        <article className="col-span-full background text p-6">
-          <div className="mb-4 flex items-center justify-between">
-            <div className="reservoir-h6 text">NFT Details</div>
-          </div>
-
-          {/* LOOKSRARE LINK */}
-
-          <div className="mb-4 flex items-center reservoir-subtitle text justify-between">
-          <div>
-          <a
-                className="reservoir-subtitle flex items-center gap-2 text"
-                target="_blank"
-                rel="noopener noreferrer"
-                href={`https://looksrare.org/collections/${token?.token?.contract}/${token?.token?.tokenId}`}
-              >
-               View on LooksRare 💎
-              </a>
-              </div>
-              </div>
-
-
-
-          {/* OPENSEA LINK */}
-
-          <div className="mb-4 flex items-center reservoir-subtitle text justify-between">
-          <div>
-          <a
-                className="reservoir-subtitle flex items-center gap-2 text"
-                target="_blank"
-                rel="noopener noreferrer"
-                href={`https://opensea.io/assets/${token?.token?.contract}/${token?.token?.tokenId}`}
-              >
-              View on OpenSea 🌊
-              </a>
-              </div>
-              </div>
-
-
-
-          {/* OWNER */}
-              <div className="mb-4 flexitems-center reservoir-subtitle text justify-between">
-          <div>
-                <a>
-                   {owner && (
-                    <Link href={`https://chat.blockscan.com/index?a=${owner}`}>
-                      <a className="reservoir-subtitle flex items-center gap-2 text"
-                          target="_blank"
-                        rel="noopener noreferrer">
-                        Message owner 💬
-                      </a>
-                    </Link>
-                  )}
+          <article className="mb-6 max-w-[533px] overflow-hidden rounded-2xl border-gray-300 bg-transparent p-6">
+            <div className="reservoir-h6 text-white mb-4">Owner</div>
+            {token?.token?.owner && (
+              <Link href={`/address/${token.token.owner}`}>
+                <a className="inline-block">
+                  <EthAccount address={token.token.owner} />
                 </a>
-              </div>
-              </div>
+              </Link>
+            )}
+          </article>
+        </div>
 
-
-          {/* CONTRACT ADDRESS */}
-
-          {token?.token?.contract && (
-            <div className="mb-4 flex items-center justify-between">
-              <div>
-                <a
-                  className="reservoir-subtitle flex items-center gap-2 text"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={`https://etherscan.io/address/${token?.token?.contract}`}
-                >
-                  View on Etherscan 🔥
-                </a>
-              </div>
+        <div className=" mb-8 self-start sm:mr-auto">
+          <article className="mb-0 max-w-[533px] overflow-hidden rounded-[3px] border-[0px] border-neutral-800 bg-neutral p-6">
+            <div className="reservoir-h2 mb-3 text-white overflow-hidden">
+              {token?.token?.name || `#${token?.token?.tokenId}`}
             </div>
-          )}
-
-          {/* TOKEN ID */}
-
-          <div className="mb-4 flex items-center justify-between">
-            <div className="reservoir-subtitle text-[#929292]">Token ID</div>
-            <div className="reservoir-h6 text-[#929292]">{token?.token?.tokenId}</div>
-          </div>
-
-          {/* TOKEN STANDARD */}
-
-          <div className="mb-4 flex items-center justify-between">
-            <div className="reservoir-subtitle text-[#929292]">Token Standard</div>
-            <div className="reservoir-h6 text-[#929292] uppercase">{token?.token?.kind}</div>
-          </div>
-
-          {/* REFRESH BUTTON */}
-
-          <div className="flex items-center justify-between">
-            <div className="reservoir-subtitle text-[#929292]">Metadata Refresh</div>
-            <button
-              className="border reservoir-h6 ml-auto flex items-center gap-2 p-2 text"
-              title="Refresh token"
-              disabled={refreshLoading}
-              onClick={() =>
-                refreshToken(
-                  `${token?.token?.contract}:${token?.token?.tokenId}`
-                )
+            <div className="reservoir-h6 text-white mb-2">Collection</div>
+            <Link
+              href={
+                mode === 'collection' ? '/' : `/collections/${collectionId}`
               }
             >
-              Refresh{' '}
-              <FiRefreshCcw
-                className={`h-4 w-4 ${
-                  refreshLoading ? 'animate-spin-reverse' : ''
-                }`}
+              <a className="reservoir-body mb-1 flex items-center gap-2">
+                <img
+                  src={optimizeImage(
+                    collection.data?.collection?.collection?.image,
+                    50
+                  )}
+                  alt="collection avatar"
+                  className="h-9 w-9 rounded-full border border-neutral-700"
+                />
+                <span className="reservoir-body text-white">
+                  {token?.token?.collection?.name}
+                </span>
+              </a>
+            </Link>
+          </article>
+          <article className="mb-0 max-w-[533px] overflow-hidden rounded-[7px] border-[1px] border-transparent bg-[#191919] p-6">
+            <div className="grid grid-cols-2 gap-8">
+              <Price
+                title="List Price"
+                price={
+                  <FormatEth
+                    amount={token?.market?.floorSell?.value}
+                    maximumFractionDigits={4}
+                    logoWidth={20}
+                  />
+                }
+              >
+                {isOwner && (
+                  <ListModal
+                    apiBase={apiBase}
+                    data={{
+                      collection: collection.data,
+                      details,
+                    }}
+                    isInTheWrongNetwork={isInTheWrongNetwork}
+                    maker={accountData?.address}
+                    setToast={setToast}
+                    signer={signer}
+                  />
+                )}
+                <BuyNow
+                  apiBase={apiBase}
+                  data={{
+                    collection: collection.data,
+                    details,
+                  }}
+                  signer={signer}
+                  isInTheWrongNetwork={isInTheWrongNetwork}
+                  setToast={setToast}
+                  show={!isOwner}
+                />
+              </Price>
+              <Price
+                title="Top Offer"
+                price={
+                  <FormatEth
+                    amount={token?.market?.topBuy?.value}
+                    maximumFractionDigits={4}
+                    logoWidth={20}
+                  />
+                }
+              >
+                <AcceptOffer
+                  apiBase={apiBase}
+                  data={{
+                    collection: collection.data,
+                    details,
+                  }}
+                  isInTheWrongNetwork={isInTheWrongNetwork}
+                  setToast={setToast}
+                  show={isOwner}
+                  signer={signer}
+                />
+                {!isOwner && (
+                  <TokenOfferModal
+                    signer={signer}
+                    data={{
+                      collection: collection.data,
+                      details,
+                    }}
+                    royalties={{
+                      bps: collection.data?.collection?.royalties?.bps,
+                      recipient:
+                        collection.data?.collection?.royalties?.recipient,
+                    }}
+                    env={{
+                      apiBase,
+                      chainId: +chainId as ChainId,
+                      openSeaApiKey,
+                    }}
+                    setToast={setToast}
+                  />
+                )}
+              </Price>
+            </div>
+            <div className="flex justify-center">
+              <CancelOffer
+                apiBase={apiBase}
+                data={{
+                  collection: collection.data,
+                  details,
+                }}
+                maker={accountData?.address.toLowerCase()}
+                signer={signer}
+                show={isTopBidder}
+                isInTheWrongNetwork={isInTheWrongNetwork}
+                setToast={setToast}
               />
-            </button>
-          </div>
-        </article>
-
-        {/* ATTRIBUTES 
-
-        <TokenAttributes token={token?.token} />
-        */}
-      </article>
+              <CancelListing
+                apiBase={apiBase}
+                data={{
+                  collection: collection.data,
+                  details,
+                }}
+                maker={accountData?.address.toLowerCase()}
+                signer={signer}
+                show={isOwner && isListed}
+                isInTheWrongNetwork={isInTheWrongNetwork}
+                setToast={setToast}
+              />
+            </div>
+          </article>
+          <TokenAttributes token={token?.token} />
+        </div>
+      </div>
     </Layout>
   )
 }
 
 export default Index
 
-const Price: FC<{ title: string; price: ReactNode; source?: ReactNode }> = ({
+const Price: FC<{ title: string; price: ReactNode }> = ({
   title,
   price,
-  source,
   children,
 }) => (
-  <div className="flex flex-col space-y-5">
-    <div className="flex">
-      <div className="text-[#929292]">{title}</div>
-      <div>{source}</div>
-    </div>
-    <div className="flex">
-    <div className="reservoir-h4 text">{price}</div>
-    <div className="reservoir-h4 text">  ETH</div>
-    </div>
+  <div className="grid space-y-5">
+    <div className="reservoir-h5 text-white">{title}</div>
+    <div className="reservoir-h1 text-white">{price}</div>
     {children}
   </div>
 )
+
 export const getServerSideProps: GetServerSideProps<{
   collectionId: string
   mode: ReturnType<typeof getMode>['mode']
-  communityId?: string
 }> = async ({ req, params }) => {
-  const options: RequestInit | undefined = {}
+  const { mode } = getMode(req, communityEnv, collectionEnv)
 
-  if (RESERVOIR_API_KEY) {
-    options.headers = {
-      'x-api-key': RESERVOIR_API_KEY,
-    }
+  const url = new URL('/tokens/details', apiBase)
+
+  const query: paths['/tokens/details']['get']['parameters']['query'] = {
+    contract: params?.contract?.toString(),
+    tokenId: params?.tokenId?.toString(),
   }
 
-  const { mode, collectionId: communityId } = getMode(
-    req,
-    USE_WILDCARD,
-    COMMUNITY,
-    COLLECTION
-  )
+  setParams(url, query)
 
-  const url = new URL('/tokens/details/v3', RESERVOIR_API_BASE)
-
-  const query: paths['/tokens/details/v3']['get']['parameters']['query'] = {
-    tokens: [`${params?.contract?.toString()}:${params?.tokenId?.toString()}`],
-  }
-
-  const href = setParams(url, query)
-
-  const res = await fetch(href, options)
+  const res = await fetch(url.href)
 
   const tokenDetails =
-    (await res.json()) as paths['/tokens/details/v3']['get']['responses']['200']['schema']
+    (await res.json()) as paths['/tokens/details']['get']['responses']['200']['schema']
 
   const collectionId = tokenDetails.tokens?.[0]?.token?.collection?.id
 
@@ -633,8 +356,11 @@ export const getServerSideProps: GetServerSideProps<{
     }
   }
 
-  return { props: { collectionId, mode, communityId } }
+  return { props: { collectionId, mode } }
 }
+
+import React from 'react'
+import { FiArrowLeft } from 'react-icons/fi'
 
 const Media: FC<{
   tokenOpenSea: {
@@ -648,7 +374,7 @@ const Media: FC<{
   // VIDEO
   if (extension === 'mp4') {
     return (
-      <video className="mb-4 w-full border" controls autoPlay loop>
+      <video className="mb-4 w-[533px]" controls autoPlay loop>
         <source src={animation_url} type="video/mp4" />
         Your browser does not support the
         <code>video</code> element.
@@ -660,7 +386,7 @@ const Media: FC<{
   if (extension === 'wav' || extension === 'mp3') {
     return (
       <div>
-        <img className="mb-4 w-full" src={tokenImage} />
+        <img className="mb-4 w-[533px] rounded-2xl" src={tokenImage} />
         <audio className="mb-4 w-full" controls src={animation_url}>
           Your browser does not support the
           <code>audio</code> element.
@@ -669,41 +395,35 @@ const Media: FC<{
     )
   }
 
-  // 3D
-   if (extension === 'gltf' || extension === 'glb') {
+       // 3D
+  if (extension === 'gltf' || extension === 'glb') {
      return (
-       <div className="mb-4 w-full">
+       <div>
          <model-viewer
-         className="w-full"
            src={animation_url}
            ar
            ar-modes="webxr scene-viewer quick-look"
-           environment-image="#000000"
+           environment-image="https://modelviewer.dev/shared-assets/environments/moon_1k.hdr"
            poster="/NeilArmstrong.webp"
            seamless-poster
-           shadow-intensity="0"
+           shadow-intensity="1"
            camera-controls
            enable-pan
-           autoPlay
-           camera-orbit="-68.55deg 80.74deg auto"
          ></model-viewer>
        </div>
      )
    }
-
-  // HTML
-  if (extension === 'html' || extension === 'gif' || undefined) {
+ 
+      // HTML
+  if (extension === 'html' || extension === undefined) {
     return (
-      <div className="w-full">
-        <iframe
-        className="mb-4 w-full"
-        height="3000"
-        width="3000"
+      <iframe
+        className="mb-6 aspect-square w-full"
+        height="533"
+        width="533"
         src={animation_url}
-      ></iframe> 
-      </div>
+      ></iframe>
     )
   }
-
   return null
 }
