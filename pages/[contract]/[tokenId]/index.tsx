@@ -456,6 +456,23 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
             <div className="reservoir-h6 text">NFT Details</div>
           </div>
 
+
+{/* MANIFOLD GALLERY LINK */}
+
+<div className="mb-4 flex items-center reservoir-subtitle text justify-between">
+          <div>
+          <a
+                className="reservoir-subtitle flex items-center gap-2 text"
+                target="_blank"
+                rel="noopener noreferrer"
+                href={`https://gallery.manifold.xyz/${token?.token?.contract}/${token?.token?.tokenId}`}
+              >
+              View on Manifold Gallery 🖼
+              </a>
+              </div>
+              </div>
+
+
           {/* LOOKSRARE LINK */}
 
           <div className="mb-4 flex items-center reservoir-subtitle text justify-between">
@@ -489,26 +506,7 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
               </div>
 
 
-
-          {/* OWNER */}
-              <div className="mb-4 flexitems-center reservoir-subtitle text justify-between">
-          <div>
-                <a>
-                   {owner && (
-                    <Link href={`https://chat.blockscan.com/index?a=${owner}`}>
-                      <a className="reservoir-subtitle flex items-center gap-2 text"
-                          target="_blank"
-                        rel="noopener noreferrer">
-                        Message owner 💬
-                      </a>
-                    </Link>
-                  )}
-                </a>
-              </div>
-              </div>
-
-
-          {/* CONTRACT ADDRESS */}
+          {/* VIEW ON ETHERSSCAN LINK */}
 
           {token?.token?.contract && (
             <div className="mb-4 flex items-center justify-between">
@@ -524,6 +522,24 @@ const Index: NextPage<Props> = ({ collectionId, mode, communityId }) => {
               </div>
             </div>
           )}
+
+
+{/* MESSAGE OWNER LINK */}
+<div className="mb-4 flexitems-center reservoir-subtitle text justify-between">
+          <div>
+                <a>
+                   {owner && (
+                    <Link href={`https://chat.blockscan.com/index?a=${owner}`}>
+                      <a className="reservoir-subtitle flex items-center gap-2 text"
+                          target="_blank"
+                        rel="noopener noreferrer">
+                        Message owner 💬
+                      </a>
+                    </Link>
+                  )}
+                </a>
+              </div>
+              </div>
 
           {/* TOKEN ID */}
 
